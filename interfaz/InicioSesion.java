@@ -14,8 +14,8 @@ import java.awt.Font;
 public class InicioSesion {
 
 	private JFrame frmLogicgroup;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textField_Usuario;
+	private JTextField textField_Contrasena;
 
 	/**
 	 * Launch the application.
@@ -50,15 +50,15 @@ public class InicioSesion {
 		frmLogicgroup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLogicgroup.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(91, 49, 129, 20);
-		frmLogicgroup.getContentPane().add(textField);
-		textField.setColumns(10);
+		textField_Usuario = new JTextField();
+		textField_Usuario.setBounds(91, 49, 129, 20);
+		frmLogicgroup.getContentPane().add(textField_Usuario);
+		textField_Usuario.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(91, 80, 129, 20);
-		frmLogicgroup.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		textField_Contrasena = new JTextField();
+		textField_Contrasena.setBounds(91, 80, 129, 20);
+		frmLogicgroup.getContentPane().add(textField_Contrasena);
+		textField_Contrasena.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Contrase\u00F1a:");
 		lblNewLabel.setBounds(12, 80, 69, 20);
@@ -74,8 +74,8 @@ public class InicioSesion {
 		lblNewLabel_1.setBounds(10, 11, 210, 27);
 		frmLogicgroup.getContentPane().add(lblNewLabel_1);
 		
-		JButton btnNewButton = new JButton("Aceptar");
-		btnNewButton.setBounds(10, 123, 210, 23);
-		frmLogicgroup.getContentPane().add(btnNewButton);
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(10, 123, 210, 23);
+		frmLogicgroup.getContentPane().add(btnAceptar);
 	}
 }
