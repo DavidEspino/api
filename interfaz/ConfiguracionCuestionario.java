@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JComboBox;
+import java.awt.BorderLayout;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JPanel;
 
 public class ConfiguracionCuestionario {
 
@@ -45,14 +49,20 @@ public class ConfiguracionCuestionario {
 		frmConfiguracinCuestionario.setTitle("Configuraci\u00F3n de Cuestionario");
 		frmConfiguracinCuestionario.setBounds(100, 100, 450, 300);
 		frmConfiguracinCuestionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmConfiguracinCuestionario.getContentPane().setLayout(null);
+		frmConfiguracinCuestionario.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton = new JButton("A\u00F1adir Cuestionario");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewButton.setBounds(10, 228, 414, 23);
-		frmConfiguracinCuestionario.getContentPane().add(btnNewButton);
+		JPanel panel = new JPanel();
+		frmConfiguracinCuestionario.getContentPane().add(panel, BorderLayout.SOUTH);
+		
+		JButton btnAadirCuestionario = new JButton("A\u00F1adir Cuestionario");
+		panel.add(btnAadirCuestionario);
+		
+		JButton btnAtras = new JButton("Atras");
+		panel.add(btnAtras);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		frmConfiguracinCuestionario.getContentPane().add(scrollPane, BorderLayout.CENTER);
 	}
 }

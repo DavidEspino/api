@@ -9,12 +9,19 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JButton;
 import java.awt.Font;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
 
 public class ModificarCrearCuestionario {
 
 	private JFrame frmCreacionmodificacionCuestionario;
-	private JTextField textField;
-	private final JScrollPane scrollPane = new JScrollPane();
+	private JPanel panel;
+	private JLabel lblNombre;
+	private JTextField textFieldNombre;
+	private JPanel panel_1;
+	private JButton btnGuardar;
+	private JButton btnCancelar;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -47,24 +54,29 @@ public class ModificarCrearCuestionario {
 		frmCreacionmodificacionCuestionario.setTitle("Creacion/Modificacion Cuestionario");
 		frmCreacionmodificacionCuestionario.setBounds(100, 100, 450, 455);
 		frmCreacionmodificacionCuestionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmCreacionmodificacionCuestionario.getContentPane().setLayout(null);
 		
-		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNombre.setBounds(106, 11, 69, 20);
-		frmCreacionmodificacionCuestionario.getContentPane().add(lblNombre);
+		panel = new JPanel();
+		frmCreacionmodificacionCuestionario.getContentPane().add(panel, BorderLayout.NORTH);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(185, 11, 129, 20);
-		frmCreacionmodificacionCuestionario.getContentPane().add(textField);
+		lblNombre = new JLabel("Nombre:");
+		panel.add(lblNombre);
+		
+		textFieldNombre = new JTextField();
+		panel.add(textFieldNombre);
+		textFieldNombre.setColumns(10);
+		
+		panel_1 = new JPanel();
+		frmCreacionmodificacionCuestionario.getContentPane().add(panel_1, BorderLayout.SOUTH);
+		
+		btnGuardar = new JButton("Guardar");
+		panel_1.add(btnGuardar);
+		
+		btnCancelar = new JButton("Cancelar");
+		panel_1.add(btnCancelar);
+		
+		scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(10, 58, 414, 290);
-		frmCreacionmodificacionCuestionario.getContentPane().add(scrollPane);
-		
-		JButton btnNewButton = new JButton("Guardar");
-		btnNewButton.setBounds(10, 383, 414, 23);
-		frmCreacionmodificacionCuestionario.getContentPane().add(btnNewButton);
+		frmCreacionmodificacionCuestionario.getContentPane().add(scrollPane, BorderLayout.CENTER);
 	}
 }

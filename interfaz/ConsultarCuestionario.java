@@ -5,6 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JButton;
 
 public class ConsultarCuestionario {
 
@@ -41,13 +46,17 @@ public class ConsultarCuestionario {
 		frmConsultarCuestionario.setTitle("Consultar Cuestionario");
 		frmConsultarCuestionario.setBounds(100, 100, 450, 300);
 		frmConsultarCuestionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmConsultarCuestionario.getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		frmConsultarCuestionario.getContentPane().add(panel, BorderLayout.SOUTH);
+		
+		JButton btnSalir = new JButton("Salir");
+		panel.add(btnSalir);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(10, 11, 414, 240);
-		frmConsultarCuestionario.getContentPane().add(scrollPane);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		frmConsultarCuestionario.getContentPane().add(scrollPane, BorderLayout.CENTER);
 	}
 
 }

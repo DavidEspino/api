@@ -7,6 +7,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ResponderCuestionario {
 
@@ -43,19 +48,20 @@ public class ResponderCuestionario {
 		frmResponderCuestionario.setTitle("Responder Cuestionario");
 		frmResponderCuestionario.setBounds(100, 100, 450, 300);
 		frmResponderCuestionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmResponderCuestionario.getContentPane().setLayout(null);
+		frmResponderCuestionario.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("T\u00EDtulo Cuestionario");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(10, 11, 152, 26);
-		frmResponderCuestionario.getContentPane().add(lblNewLabel);
+		JPanel panel = new JPanel();
+		frmResponderCuestionario.getContentPane().add(panel, BorderLayout.SOUTH);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 48, 434, 1);
-		frmResponderCuestionario.getContentPane().add(separator);
+		JButton btnSiguiente = new JButton("Siguiente");
+		panel.add(btnSiguiente);
 		
-		JButton btnNewButton = new JButton("Siguiente");
-		btnNewButton.setBounds(10, 228, 414, 23);
-		frmResponderCuestionario.getContentPane().add(btnNewButton);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		panel.add(btnCancelar);
 	}
 }

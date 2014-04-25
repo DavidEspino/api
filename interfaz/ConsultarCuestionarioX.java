@@ -8,6 +8,14 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import javax.swing.Box;
+import javax.swing.JPanel;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConsultarCuestionarioX {
 
@@ -44,37 +52,42 @@ public class ConsultarCuestionarioX {
 		frmConsultarCuestionarioX.setTitle("Consultar Cuestionario X");
 		frmConsultarCuestionarioX.setBounds(100, 100, 450, 266);
 		frmConsultarCuestionarioX.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmConsultarCuestionarioX.getContentPane().setLayout(null);
+		frmConsultarCuestionarioX.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("T\u00EDtulo Pregunta");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(10, 8, 414, 23);
-		frmConsultarCuestionarioX.getContentPane().add(lblNewLabel);
+		JLabel lblTitulo = new JLabel("Titulo pregunta");
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		frmConsultarCuestionarioX.getContentPane().add(lblTitulo, BorderLayout.NORTH);
 		
-		JButton btnNewButton = new JButton("Siguiente");
-		btnNewButton.setBounds(10, 194, 414, 23);
-		frmConsultarCuestionarioX.getContentPane().add(btnNewButton);
+		JPanel panel = new JPanel();
+		frmConsultarCuestionarioX.getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(new GridLayout(5, 1, 0, 0));
 		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 42, 434, 2);
-		frmConsultarCuestionarioX.getContentPane().add(separator);
+		JLabel lblPregunta = new JLabel("Pregunta1");
+		lblPregunta.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblPregunta);
 		
-		JLabel lblNewLabel_1 = new JLabel("Respuesta 1");
-		lblNewLabel_1.setBounds(10, 55, 172, 23);
-		frmConsultarCuestionarioX.getContentPane().add(lblNewLabel_1);
+		JLabel lblPregunta_1 = new JLabel("Pregunta2");
+		lblPregunta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblPregunta_1);
 		
-		JLabel lblRespuesta = new JLabel("Respuesta 2");
-		lblRespuesta.setBounds(10, 90, 172, 23);
-		frmConsultarCuestionarioX.getContentPane().add(lblRespuesta);
+		JLabel lblPregunta_2 = new JLabel("Pregunta3");
+		lblPregunta_2.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblPregunta_2);
 		
-		JLabel lblRespuesta_1 = new JLabel("Respuesta 3");
-		lblRespuesta_1.setBounds(10, 126, 172, 23);
-		frmConsultarCuestionarioX.getContentPane().add(lblRespuesta_1);
+		JLabel lblPregunta_3 = new JLabel("Pregunta4");
+		lblPregunta_3.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblPregunta_3);
 		
-		JLabel lblRespuesta_2 = new JLabel("Respuesta 4");
-		lblRespuesta_2.setBounds(10, 160, 172, 23);
-		frmConsultarCuestionarioX.getContentPane().add(lblRespuesta_2);
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1);
+		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JButton btnSiguiente = new JButton("Siguiente");
+		panel_1.add(btnSiguiente);
+		
+		JButton btnAtras = new JButton("Atras");
+		panel_1.add(btnAtras);
 	}
 
 }

@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import java.awt.BorderLayout;
 
 public class RellenarCuestionario {
 
@@ -41,13 +42,11 @@ public class RellenarCuestionario {
 		frmRellenarCuestionario.setTitle("Rellenar Cuestionario");
 		frmRellenarCuestionario.setBounds(100, 100, 450, 300);
 		frmRellenarCuestionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmRellenarCuestionario.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(10, 11, 414, 240);
-		frmRellenarCuestionario.getContentPane().add(scrollPane);
+		frmRellenarCuestionario.getContentPane().add(scrollPane, BorderLayout.CENTER);
 	}
 
 }

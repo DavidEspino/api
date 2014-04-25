@@ -10,12 +10,15 @@ import javax.swing.JButton;
 import java.awt.Window.Type;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Font;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
 public class InicioSesion {
 
 	private JFrame frmLogicgroup;
-	private JTextField textField_Usuario;
-	private JTextField textField_Contrasena;
+	private JTextField textFieldUsuario;
+	private JTextField textFieldContrasena;
 
 	/**
 	 * Launch the application.
@@ -46,36 +49,48 @@ public class InicioSesion {
 	private void initialize() {
 		frmLogicgroup = new JFrame();
 		frmLogicgroup.setTitle("LogicGroup");
-		frmLogicgroup.setBounds(100, 100, 246, 195);
+		frmLogicgroup.setBounds(100, 100, 246, 175);
 		frmLogicgroup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmLogicgroup.getContentPane().setLayout(null);
 		
-		textField_Usuario = new JTextField();
-		textField_Usuario.setBounds(91, 49, 129, 20);
-		frmLogicgroup.getContentPane().add(textField_Usuario);
-		textField_Usuario.setColumns(10);
+		JPanel panel = new JPanel();
+		frmLogicgroup.getContentPane().add(panel, BorderLayout.NORTH);
 		
-		textField_Contrasena = new JTextField();
-		textField_Contrasena.setBounds(91, 80, 129, 20);
-		frmLogicgroup.getContentPane().add(textField_Contrasena);
-		textField_Contrasena.setColumns(10);
+		JLabel lblInicioDeSesin = new JLabel("Inicio de sesi\u00F3n");
+		lblInicioDeSesin.setFont(new Font("Tahoma", Font.BOLD, 16));
+		panel.add(lblInicioDeSesin);
 		
-		JLabel lblNewLabel = new JLabel("Contrase\u00F1a:");
-		lblNewLabel.setBounds(12, 80, 69, 20);
-		frmLogicgroup.getContentPane().add(lblNewLabel);
-		
-		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(12, 49, 69, 20);
-		frmLogicgroup.getContentPane().add(lblUsuario);
-		
-		JLabel lblNewLabel_1 = new JLabel("Inicio de sesi\u00F3n");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(10, 11, 210, 27);
-		frmLogicgroup.getContentPane().add(lblNewLabel_1);
+		JPanel panel_1 = new JPanel();
+		frmLogicgroup.getContentPane().add(panel_1, BorderLayout.SOUTH);
+		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(10, 123, 210, 23);
-		frmLogicgroup.getContentPane().add(btnAceptar);
+		panel_1.add(btnAceptar);
+		
+		JButton btnSalir = new JButton("Salir");
+		panel_1.add(btnSalir);
+		
+		JPanel panel_2 = new JPanel();
+		frmLogicgroup.getContentPane().add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_3 = new JPanel();
+		panel_2.add(panel_3, BorderLayout.NORTH);
+		
+		JLabel lblUsuario = new JLabel("Usuario:");
+		panel_3.add(lblUsuario);
+		
+		textFieldUsuario = new JTextField();
+		panel_3.add(textFieldUsuario);
+		textFieldUsuario.setColumns(10);
+		
+		JPanel panel_4 = new JPanel();
+		panel_2.add(panel_4, BorderLayout.CENTER);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
+		panel_4.add(lblContrasea);
+		
+		textFieldContrasena = new JTextField();
+		panel_4.add(textFieldContrasena);
+		textFieldContrasena.setColumns(10);
 	}
 }
