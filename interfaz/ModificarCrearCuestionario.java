@@ -22,6 +22,7 @@ public class ModificarCrearCuestionario {
 	private JButton btnGuardar;
 	private JButton btnCancelar;
 	private JScrollPane scrollPane;
+	private JButton btnNuevaPregunta;
 
 	/**
 	 * Launch the application.
@@ -63,10 +64,13 @@ public class ModificarCrearCuestionario {
 		
 		textFieldNombre = new JTextField();
 		panel.add(textFieldNombre);
-		textFieldNombre.setColumns(10);
+		textFieldNombre.setColumns(20);
 		
 		panel_1 = new JPanel();
 		frmCreacionmodificacionCuestionario.getContentPane().add(panel_1, BorderLayout.SOUTH);
+		
+		btnNuevaPregunta = new JButton("Nueva pregunta");
+		panel_1.add(btnNuevaPregunta);
 		
 		btnGuardar = new JButton("Guardar");
 		panel_1.add(btnGuardar);

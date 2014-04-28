@@ -50,7 +50,7 @@ public class ConsultarCuestionario {
 		JPanel panel = new JPanel();
 		frmConsultarCuestionario.getContentPane().add(panel, BorderLayout.SOUTH);
 		
-		JButton btnSalir = new JButton("Salir");
+		JButton btnSalir = new JButton("   Atras   ");
 		panel.add(btnSalir);
 		
 		JScrollPane scrollPane = new JScrollPane();

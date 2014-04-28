@@ -46,7 +46,7 @@ public class ConfiguracionCuestionario {
 	 */
 	private void initialize() {
 		frmConfiguracinCuestionario = new JFrame();
-		frmConfiguracinCuestionario.setTitle("Configuraci\u00F3n de Cuestionario");
+		frmConfiguracinCuestionario.setTitle("Configuraci\u00F3n de Cuestionarios");
 		frmConfiguracinCuestionario.setBounds(100, 100, 450, 300);
 		frmConfiguracinCuestionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmConfiguracinCuestionario.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -57,7 +57,7 @@ public class ConfiguracionCuestionario {
 		JButton btnAadirCuestionario = new JButton("A\u00F1adir Cuestionario");
 		panel.add(btnAadirCuestionario);
 		
-		JButton btnAtras = new JButton("Atras");
+		JButton btnAtras = new JButton("      Atras       ");
 		panel.add(btnAtras);
 		
 		JScrollPane scrollPane = new JScrollPane();

@@ -49,7 +49,7 @@ public class InicioSesion {
 	private void initialize() {
 		frmLogicgroup = new JFrame();
 		frmLogicgroup.setTitle("LogicGroup");
-		frmLogicgroup.setBounds(100, 100, 246, 175);
+		frmLogicgroup.setBounds(100, 100, 335, 191);
 		frmLogicgroup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
@@ -66,7 +66,7 @@ public class InicioSesion {
 		JButton btnAceptar = new JButton("Aceptar");
 		panel_1.add(btnAceptar);
 		
-		JButton btnSalir = new JButton("Salir");
+		JButton btnSalir = new JButton("   Salir   ");
 		panel_1.add(btnSalir);
 		
 		JPanel panel_2 = new JPanel();
@@ -76,12 +76,12 @@ public class InicioSesion {
 		JPanel panel_3 = new JPanel();
 		panel_2.add(panel_3, BorderLayout.NORTH);
 		
-		JLabel lblUsuario = new JLabel("Usuario:");
+		JLabel lblUsuario = new JLabel("Usuario:     ");
 		panel_3.add(lblUsuario);
 		
 		textFieldUsuario = new JTextField();
 		panel_3.add(textFieldUsuario);
-		textFieldUsuario.setColumns(10);
+		textFieldUsuario.setColumns(15);
 		
 		JPanel panel_4 = new JPanel();
 		panel_2.add(panel_4, BorderLayout.CENTER);
@@ -91,6 +91,6 @@ public class InicioSesion {
 		
 		textFieldContrasena = new JTextField();
 		panel_4.add(textFieldContrasena);
-		textFieldContrasena.setColumns(10);
+		textFieldContrasena.setColumns(15);
 	}
 }
