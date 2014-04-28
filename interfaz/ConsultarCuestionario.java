@@ -1,23 +1,29 @@
 package interfaz;
 
-import java.awt.EventQueue;
-
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.LinkedList;
+
 import javax.swing.JButton;
+import javax.swing.JList;
+
+import logica.Cuestionario;
+import logica.GestorCuestionarios;
 
 public class ConsultarCuestionario {
 
 	private JFrame frmConsultarCuestionario;
+	private JList<Cuestionario> list;
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -29,7 +35,7 @@ public class ConsultarCuestionario {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
@@ -57,6 +63,25 @@ public class ConsultarCuestionario {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		frmConsultarCuestionario.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		DefaultListModel<Cuestionario> modelo = new DefaultListModel<Cuestionario>();
+		LinkedList<Cuestionario> listaCuestionarios = GestorCuestionarios.getGestorCuestionarios().obtenerCuestionarios();
+		for (Cuestionario cuestionario : listaCuestionarios) {
+			modelo.addElement(cuestionario);
+		}
+		
+		list = new JList<Cuestionario>(modelo);
+		scrollPane.setViewportView(list);
+		list.addMouseListener(new MouseAdapter() {			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				new CuestionarioX(list.getSelectedValue());
+			}
+		});
+		
+		
+		
+		frmConsultarCuestionario.setVisible(true);
 	}
 
 }
