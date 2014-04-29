@@ -18,8 +18,8 @@ public class GestorCuestionarios {
 	}
 
 	public LinkedList<Cuestionario> obtenerCuestionarios() {
-		String nombre, subconsulta;
-		int id, numPreg;
+		String nombre;
+		int id;
 		Cuestionario c;
 		LinkedList<Cuestionario> rdo = new LinkedList<Cuestionario>();
 		String consulta = "select nombre, id from cuestionario;";
@@ -28,13 +28,6 @@ public class GestorCuestionarios {
 			while(sql.next()){
 				nombre = sql.getString("nombre");
 				id = sql.getInt("id");
-				subconsulta = "select count(*) from preguntas where idCuestionario='"+id+"';";
-				ResultSet subsql = BD.getInstance().consulta(subconsulta);
-				if(subsql.next()){
-					numPreg = subsql.getInt("count(*)");
-				}else{
-					numPreg = 0;
-				}
 				c = new Cuestionario(id, nombre);
 				rdo.add(c);
 			}
