@@ -42,7 +42,7 @@ public class Cuestionario {
 
 	@Override
 	public String toString() {
-		return nombre+" Preguntas: "+numPreguntas;
+		return nombre+" Preguntas: "+this.listaPreguntas.size();
 	}
 	
 }

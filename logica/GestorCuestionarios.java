@@ -35,7 +35,7 @@ public class GestorCuestionarios {
 				}else{
 					numPreg = 0;
 				}
-				c = new Cuestionario(id, nombre, numPreg);
+				c = new Cuestionario(id, nombre);
 				rdo.add(c);
 			}
 		} catch (SQLException e) {
