@@ -3,14 +3,18 @@ package interfaz;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+
 import java.awt.Window.Type;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Font;
+
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
@@ -18,7 +22,7 @@ public class InicioSesion {
 
 	private JFrame frmLogicgroup;
 	private JTextField textFieldUsuario;
-	private JTextField textFieldContrasena;
+	private JPasswordField passwordFieldContrasena;
 
 	/**
 	 * Launch the application.
@@ -89,8 +93,8 @@ public class InicioSesion {
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		panel_4.add(lblContrasea);
 		
-		textFieldContrasena = new JTextField();
-		panel_4.add(textFieldContrasena);
-		textFieldContrasena.setColumns(15);
+		passwordFieldContrasena = new JPasswordField();
+		panel_4.add(passwordFieldContrasena);
+		passwordFieldContrasena.setColumns(15);
 	}
 }
