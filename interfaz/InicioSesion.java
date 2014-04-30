@@ -62,7 +62,8 @@ public class InicioSesion extends JFrame {
 		frmLogicgroup = new JFrame();
 		frmLogicgroup.setTitle("LogicGroup");
 		frmLogicgroup.setBounds(100, 100, 335, 209);
-		frmLogicgroup.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmLogicgroup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		
 		//Panels
 		JPanel panel = new JPanel();
@@ -129,6 +130,7 @@ public class InicioSesion extends JFrame {
 					if (tipo == "fallo"){
 						lblError.setText("Contraseña o usuario incorrectos");
 					}
+
 					else if (tipo.equals("rellenador")) {
 						//RellenarCuestionario frame = new RellenarCuestionario(usuario);
 						//frame.setVisible(true);
@@ -144,6 +146,7 @@ public class InicioSesion extends JFrame {
 						//frame.setVisible(true);
 						frmLogicgroup.dispose();
 					}
+
 					else{
 						lblError.setText("Error desconocido");
 					}
