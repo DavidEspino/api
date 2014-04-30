@@ -18,9 +18,9 @@ public class BD {
 
 	private BD(){
 		/**conexion MySQL*/
-		this.usuario = "api"; //usuario creado en MySQL y con permiso en la Base de
-		this.clave = "api"; //Password de mysql del usuario
-		this.url = "jdbc:mysql://localhost:3306/practica_api"; //Forma de "encontrar" la Base de Datos en
+		this.usuario = "usuarioAPI"; //usuario creado en MySQL y con permiso en la Base de
+		this.clave = "mtYc4yzXTDEbK6VF"; //Password de mysql del usuario
+		this.url = "jdbc:mysql://localhost:3306/auditorias"; //Forma de "encontrar" la Base de Datos en
 		this.driverClassName = "com.mysql.jdbc.Driver"; //driver para trabajar con MySQL   	
 		try {
 			AbrirConexion();
