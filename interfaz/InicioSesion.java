@@ -125,7 +125,7 @@ public class InicioSesion extends JFrame {
 				else {
 					@SuppressWarnings("deprecation")
 					String tipo = GestorLogin.getMiGestorLogin().login(usuario, passwordFieldContrasena.getText());
-					System.out.println(tipo);
+
 					if (tipo == "fallo"){
 						lblError.setText("Contraseña o usuario incorrectos");
 					}
@@ -141,7 +141,7 @@ public class InicioSesion extends JFrame {
 						frmLogicgroup.dispose();
 					}
 					else if (tipo.equals("consultor")) {
-						ConsultarCuestionario frame = new ConsultarCuestionario(usuario);
+						ConsultarCuestionario frame = new ConsultarCuestionario();
 						frame.getFrmConsultarCuestionario().setVisible(true);
 						frmLogicgroup.dispose();
 					}

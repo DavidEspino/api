@@ -65,6 +65,12 @@ public class ConfiguracionCuestionario extends JFrame {
 		JButton btnAadirCuestionario = new JButton("A\u00F1adir Cuestionario");
 		panel.add(btnAadirCuestionario);
 		
+		
+		JButton btnModificarCuestionario = new JButton("Modificar Cuestionario");
+		panel.add(btnModificarCuestionario);
+
+		
+		
 		JButton btnAtras = new JButton("      Atras       ");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -73,6 +79,7 @@ public class ConfiguracionCuestionario extends JFrame {
 				frmConfiguracinCuestionario.dispose();
 			}
 		});
-		panel.add(btnAtras);
+		panel.add(btnAtras);		
+
 	}
 }

@@ -42,7 +42,7 @@ public class ConsultarCuestionario {
 	 * Create the application.
 	 * @param usuario 
 	 */
-	public ConsultarCuestionario(String usuario) {
+	public ConsultarCuestionario() {
 		initialize();
 	}
 	
