@@ -59,7 +59,8 @@ public class InicioSesion extends JFrame {
 		frmLogicgroup = new JFrame();
 		frmLogicgroup.setTitle("LogicGroup");
 		frmLogicgroup.setBounds(100, 100, 335, 209);
-		frmLogicgroup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLogicgroup.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//frmLogicgroup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Panels
 		JPanel panel = new JPanel();
@@ -127,17 +128,19 @@ public class InicioSesion extends JFrame {
 					else if (tipo == "rellenador") {
 						RellenarCuestionario frame = new RellenarCuestionario(usuario);
 						frame.setVisible(true);
-						dispose();
+						frmLogicgroup.dispose();
 					}
 					else if (tipo == "contestador") {
 						ConfiguracionCuestionario frame = new ConfiguracionCuestionario(usuario);
 						frame.setVisible(true);
-						dispose();
+						frmLogicgroup.dispose();
 					}
 					else if (tipo == "consultor") {
-						ConsultarCuestionario frame = new ConsultarCuestionario(usuario);
-						frame.setVisible(true);
-						dispose();
+						//ConsultarCuestionario frame = new ConsultarCuestionario(usuario);
+						new ConsultarCuestionario();
+						//frame.setVisible(true);
+						//dispose();
+						frmLogicgroup.dispose();
 					}
 					else{
 						lblError.setText("Error desconocido");
