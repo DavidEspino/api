@@ -10,7 +10,6 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 import java.awt.Window.Type;
-import java.awt.Dialog.ModalExclusionType;
 import java.awt.Font;
 
 import javax.swing.JPanel;
@@ -21,17 +20,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import logica.GestorLogin;
+
 import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class InicioSesion extends JFrame {
 
 	private JFrame frmLogicgroup;
 	private JTextField textFieldUsuario;
 	private JPasswordField passwordFieldContrasena;
 
-	/**
-	 * Launch the application.
-	 */
+	
+	//Constructora
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,22 +44,25 @@ public class InicioSesion extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	public InicioSesion() {
 		initialize();
 	}
+	
+	
+	//Geter para llamarla desde otra ventana
+	public JFrame getFrmLogicgroup() {
+		return frmLogicgroup;
+	}
+	
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
+	//Window
 	private void initialize() {
 		frmLogicgroup = new JFrame();
 		frmLogicgroup.setTitle("LogicGroup");
 		frmLogicgroup.setBounds(100, 100, 335, 209);
-		frmLogicgroup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLogicgroup.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		//Panels
 		JPanel panel = new JPanel();
@@ -113,6 +116,7 @@ public class InicioSesion extends JFrame {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String usuario = textFieldUsuario.getText();
+
 				if (usuario.isEmpty()){
 					lblError.setText("Error Usuario vacio");
 				}
@@ -120,24 +124,25 @@ public class InicioSesion extends JFrame {
 					lblError.setText("Error contraseña vacia");
 				}
 				else {
-					String tipo = GestorLogin.getMiGestorLogin().login(usuario, passwordFieldContrasena.getPassword().toString());
+					String tipo = GestorLogin.getMiGestorLogin().login(usuario, passwordFieldContrasena.getText());
+					System.out.println(tipo);
 					if (tipo == "fallo"){
 						lblError.setText("Contraseña o usuario incorrectos");
 					}
-					else if (tipo == "rellenador") {
-						RellenarCuestionario frame = new RellenarCuestionario(usuario);
-						frame.setVisible(true);
-						dispose();
+					else if (tipo.equals("rellenador")) {
+						//RellenarCuestionario frame = new RellenarCuestionario(usuario);
+						//frame.setVisible(true);
+						frmLogicgroup.dispose();
 					}
-					else if (tipo == "contestador") {
+					else if (tipo.equals("contestador")) {
 						ConfiguracionCuestionario frame = new ConfiguracionCuestionario(usuario);
-						frame.setVisible(true);
-						dispose();
+						frame.getFrmConfiguracinCuestionario().setVisible(true);
+						frmLogicgroup.dispose();
 					}
-					else if (tipo == "consultor") {
-						ConsultarCuestionario frame = new ConsultarCuestionario(usuario);
-						frame.setVisible(true);
-						dispose();
+					else if (tipo.equals("consultor")) {
+						//ConsultarCuestionario frame = new ConsultarCuestionario(usuario);
+						//frame.setVisible(true);
+						frmLogicgroup.dispose();
 					}
 					else{
 						lblError.setText("Error desconocido");
@@ -153,7 +158,7 @@ public class InicioSesion extends JFrame {
 		JButton btnSalir = new JButton("   Salir   ");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				frmLogicgroup.dispose();
 			}
 		});
 		panel_1.add(btnSalir);

@@ -26,9 +26,10 @@ public class GestorLogin {
 		boolean login =false;
 		
 		try {
-			ResultSet rs = BD.getInstance().consulta("select nomUsu,contraseña,tipo from administrador where nomUsu='"+nombreRellenador+"';");				
+			ResultSet rs = BD.getInstance().consulta("select nomUsu,contraseña,tipo from usuarios where nomUsu='"+nombreRellenador+"';");				
 			rs.next();
-			if(rs.getString(2)==contrasena){
+
+			if(rs.getString(2).equals(contrasena)){
 				login=true;
 			}
 			if (login == true){
