@@ -6,10 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
-import java.awt.Window.Type;
 import java.awt.Font;
 
 import javax.swing.JPanel;
@@ -125,6 +123,7 @@ public class InicioSesion extends JFrame {
 					lblError.setText("Error contraseña vacia");
 				}
 				else {
+					@SuppressWarnings("deprecation")
 					String tipo = GestorLogin.getMiGestorLogin().login(usuario, passwordFieldContrasena.getText());
 					System.out.println(tipo);
 					if (tipo == "fallo"){
@@ -132,8 +131,8 @@ public class InicioSesion extends JFrame {
 					}
 
 					else if (tipo.equals("rellenador")) {
-						//RellenarCuestionario frame = new RellenarCuestionario(usuario);
-						//frame.setVisible(true);
+						RellenarCuestionario frame = new RellenarCuestionario(usuario);
+						frame.getFrmRellenarCuestionario().setVisible(true);
 						frmLogicgroup.dispose();
 					}
 					else if (tipo.equals("contestador")) {
@@ -142,8 +141,8 @@ public class InicioSesion extends JFrame {
 						frmLogicgroup.dispose();
 					}
 					else if (tipo.equals("consultor")) {
-						//ConsultarCuestionario frame = new ConsultarCuestionario(usuario);
-						//frame.setVisible(true);
+						ConsultarCuestionario frame = new ConsultarCuestionario(usuario);
+						frame.getFrmConsultarCuestionario().setVisible(true);
 						frmLogicgroup.dispose();
 					}
 

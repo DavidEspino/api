@@ -5,7 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
@@ -13,14 +15,12 @@ public class RellenarCuestionario {
 
 	private JFrame frmRellenarCuestionario;
 
-	/**
-	 * Launch the application.
-	 */
+	//Constructora
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RellenarCuestionario window = new RellenarCuestionario();
+					RellenarCuestionario window = new RellenarCuestionario(null);
 					window.frmRellenarCuestionario.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -29,16 +29,17 @@ public class RellenarCuestionario {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public RellenarCuestionario() {
+	public RellenarCuestionario(String usuario) {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
+	//Getter para llamar desde otra ventana
+	public JFrame getFrmRellenarCuestionario() {
+		return frmRellenarCuestionario;
+	}
+
+	//window
 	private void initialize() {
 		frmRellenarCuestionario = new JFrame();
 		frmRellenarCuestionario.setTitle("Rellenar Cuestionario");
