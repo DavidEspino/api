@@ -105,8 +105,6 @@ public class ResponderCuestionario {
 				JRadioButton rdbtnResCuatro = new JRadioButton("");
 				panelPregTest.add(rdbtnResCuatro);
 			
-			//lo pongo como no visible mientras hago los siguientes, lueo jugare con ello dependiendo del tipo de pregunta
-			//panelPregTest.setVisible(false);
 			
 			//panel para preguntas de tipo satisfaccion
 			JPanel panelPregSatis = new JPanel();
@@ -132,9 +130,7 @@ public class ResponderCuestionario {
 				JRadioButton rdbtnCinco = new JRadioButton("5");
 				panelPregSatis.add(rdbtnCinco);
 			
-			//lo pongo como no visible mientras hago los siguientes, lueo jugare con ello dependiendo del tipo de pregunta
-			//panelPregSatis.setVisible(false);		
-			
+
 			
 			//panel para pregunta larga
 			JPanel panelPregLarga = new JPanel();
@@ -149,8 +145,7 @@ public class ResponderCuestionario {
 				panelPregLarga.add(textRespLarga);
 				textRespLarga.setColumns(30);
 			
-			//lo pongo como no visible mientras hago los siguientes, lueo jugare con ello dependiendo del tipo de pregunta
-			//panelPregLarga.setVisible(false);	
+
 			
 			//panel para pregunta corta
 			JPanel panelPregCorta = new JPanel();
@@ -164,9 +159,7 @@ public class ResponderCuestionario {
 				textField = new JTextField();
 				panelPregCorta.add(textField);
 				textField.setColumns(10);
-				
-			//lo pongo como no visible mientras hago los siguientes, lueo jugare con ello dependiendo del tipo de pregunta
-			//panelPregCorta.setVisible(false);	
+
 		
 		//panel de los botones
 		JPanel panelBotones = new JPanel();
