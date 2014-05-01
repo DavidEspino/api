@@ -129,19 +129,14 @@ public class InicioSesion extends JFrame {
 					if (tipo == "fallo"){
 						lblError.setText("Contraseña o usuario incorrectos");
 					}
-
-					else if (tipo.equals("rellenador")) {
-						RellenarCuestionario frame = new RellenarCuestionario(usuario);
-						frame.getFrmRellenarCuestionario().setVisible(true);
-						frmLogicgroup.dispose();
-					}
-					else if (tipo.equals("contestador")) {
+					
+					else if (tipo.equals("rellenador")) {//el rellenador es el que crea el cuestionario
 						ConfiguracionCuestionario frame = new ConfiguracionCuestionario(usuario);
 						frame.getFrmConfiguracinCuestionario().setVisible(true);
 						frmLogicgroup.dispose();
 					}
-					else if (tipo.equals("consultor")) {
-						ConsultarCuestionario frame = new ConsultarCuestionario();
+					else if (tipo.equals("contestador") || tipo.equals("consultor")) {
+						ConsultarCuestionario frame = new ConsultarCuestionario(usuario, tipo);
 						frame.getFrmConsultarCuestionario().setVisible(true);
 						frmLogicgroup.dispose();
 					}
