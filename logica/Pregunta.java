@@ -8,12 +8,12 @@ public class Pregunta {
 
 	private int id;
 	private String titulo;
-	//private String respuesta;
+	//private String tipo;
 	private LinkedList<String> listaRespuestas;
 
 	public Pregunta(int pId, String pTitulo){
 		this.id = pId;
-		titulo = pTitulo;
+		titulo = pTitulo;	
 		cargarRespuestas();
 	}
 
@@ -33,6 +33,25 @@ public class Pregunta {
 
 	private String getTitulo(){
 		return this.titulo;
+	}
+	
+	/**
+	 * @author HelenJ
+	 */
+	public String getTipoPreg(int pIdPregunta){
+		String tipo="";
+		
+		try {
+			int cont=2;	
+			String sql = "SELECT tipo "
+							+ "FROM preguntas "
+							+ "WHERE idPregunta = "+pIdPregunta+";";
+			ResultSet resul = BD.getInstance().consulta(sql);
+			tipo=resul.getString("tipo");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tipo;
 	}
 	/**
 	 * @author HelenJ
