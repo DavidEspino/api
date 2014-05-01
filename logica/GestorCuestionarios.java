@@ -40,5 +40,25 @@ public class GestorCuestionarios {
 	}
 
 	
-	
+	public LinkedList<Cuestionario> obtenerCuestionariosUsuario(String pUsuario) {
+		String nombre;
+		int id;
+		Cuestionario c;
+		LinkedList<Cuestionario> rdo = new LinkedList<Cuestionario>();
+		String consulta = "select titulo, idCuestionario from cuestionario where usuCreador='"+pUsuario+"';";
+		try {
+			ResultSet sql = BD.getInstance().consulta(consulta);
+			while(sql.next()){
+				nombre = sql.getString("titulo");
+				id = sql.getInt("idCuestionario");
+				c = new Cuestionario(id, nombre);
+				rdo.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return rdo;
+	}
 }

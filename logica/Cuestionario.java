@@ -68,6 +68,10 @@ public class Cuestionario {
 	public String getNombre() {
 		return nombre;
 	}
+	
+	public int getId() {
+		return id;
+	}
 
 	public LinkedList<Pregunta> getPreguntas() {
 		return this.listaPreguntas;

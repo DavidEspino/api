@@ -24,9 +24,7 @@ public class ModificarCrearCuestionario {
 	private JScrollPane scrollPane;
 	private JButton btnNuevaPregunta;
 
-	/**
-	 * Launch the application.
-	 */
+	//Constructor
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -40,16 +38,20 @@ public class ModificarCrearCuestionario {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public ModificarCrearCuestionario() {
 		initialize();
 	}
+	public ModificarCrearCuestionario(int idCuestionario) {
+		initialize();
+	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
+	//Getter to call the window
+	public JFrame getFrmCreacionmodificacionCuestionario() {
+		return frmCreacionmodificacionCuestionario;
+	}
+
+	//Window
 	private void initialize() {
 		frmCreacionmodificacionCuestionario = new JFrame();
 		frmCreacionmodificacionCuestionario.setTitle("Creacion/Modificacion Cuestionario");
