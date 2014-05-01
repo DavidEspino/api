@@ -31,8 +31,11 @@ public class Pregunta {
 		
 	}
 
-	private String getTitulo(){
+	public String getTitulo(){
 		return this.titulo;
+	}
+	public int getId() {
+		return id;
 	}
 	/**
 	 * @author HelenJ

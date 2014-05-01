@@ -91,7 +91,7 @@ public class ConfiguracionCuestionario extends JFrame {
 		JButton btnAadirCuestionario = new JButton("A\u00F1adir Cuestionario");
 		btnAadirCuestionario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ModificarCrearCuestionario frame = new ModificarCrearCuestionario();
+				ModificarCrearCuestionario frame = new ModificarCrearCuestionario(usuario);
 				frame.getFrmCreacionmodificacionCuestionario().setVisible(true);
 				frmConfiguracinCuestionario.dispose();
 			}
@@ -107,7 +107,7 @@ public class ConfiguracionCuestionario extends JFrame {
 				int idCuestionario = listaCuestionarios.get(aux).getId();
 				
 				
-				ModificarCrearCuestionario frame = new ModificarCrearCuestionario(idCuestionario);
+				ModificarCrearCuestionario frame = new ModificarCrearCuestionario(usuario, idCuestionario);
 				frame.getFrmCreacionmodificacionCuestionario().setVisible(true);
 				frmConfiguracinCuestionario.dispose();
 			}
