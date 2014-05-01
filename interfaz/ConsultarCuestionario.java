@@ -7,6 +7,8 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
@@ -20,6 +22,7 @@ import logica.GestorCuestionarios;
 public class ConsultarCuestionario {
 
 	private JFrame frmConsultarCuestionario;
+	private String usuario, tipo;
 	private JList<Cuestionario> list;
 
 	/**
@@ -42,7 +45,9 @@ public class ConsultarCuestionario {
 	 * Create the application.
 	 * @param usuario 
 	 */
-	public ConsultarCuestionario() {
+	public ConsultarCuestionario(String pUsuario, String pTipo) {
+		usuario=pUsuario;
+		tipo=pTipo;
 		initialize();
 	}
 	
@@ -67,7 +72,14 @@ public class ConsultarCuestionario {
 		JPanel panel = new JPanel();
 		frmConsultarCuestionario.getContentPane().add(panel, BorderLayout.SOUTH);
 		
-		JButton btnSalir = new JButton("   Atras   ");
+		JButton btnSalir = new JButton("Atras");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				InicioSesion frame = new InicioSesion();
+				frame.getFrmLogicgroup().setVisible(true);
+				frmConsultarCuestionario.dispose();	
+			}
+		});		
 		panel.add(btnSalir);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -86,7 +98,13 @@ public class ConsultarCuestionario {
 		list.addMouseListener(new MouseAdapter() {			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				new CuestionarioX(list.getSelectedValue());
+				//aqui dependiendo del tipo de usuario que sea se ira a una pantalla u otra 
+				if (tipo.equals("consultor")){
+					new CuestionarioX(list.getSelectedValue());
+				}
+				else if (tipo.equals("contestador")){
+					new ResponderCuestionario(list.getSelectedValue(),usuario);
+				}
 			}
 		});
 		

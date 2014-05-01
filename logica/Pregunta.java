@@ -34,7 +34,17 @@ public class Pregunta {
 	private String getTitulo(){
 		return this.titulo;
 	}
-
+	/**
+	 * @author HelenJ
+	 */
+	private void anadirRespuesta(String pResp, String pUsuario){
+		try {
+			String sql = "INSERT INTO `respuesta`(`idPreg`, `respuesta`, `idusuariocontesta`) VALUES ("+this.id+",'"+pResp+",'"+pUsuario+"')";
+			BD.getInstance().insertar(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public LinkedList<String> getRespuestas() {
 		return this.listaRespuestas;
