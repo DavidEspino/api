@@ -19,12 +19,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import logica.Cuestionario;
+
 import javax.swing.JRadioButton;
 import javax.swing.JLayeredPane;
 import javax.swing.BoxLayout;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.LinkedList;
+
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JProgressBar;
@@ -35,6 +39,8 @@ public class ResponderCuestionario {
 	private Cuestionario cuestionario;
 	private JTextField textRespLarga;
 	private JTextField textField;
+	private JLayeredPane layeredPane;//aqui meto los distintos paneles de cada tipo de respuesta
+	private LinkedList<String[]> respuestas=new LinkedList<String[]>() ;
 
 /*
 	public static void main(String[] args) {
@@ -80,9 +86,13 @@ public class ResponderCuestionario {
 			JProgressBar progressBar = new JProgressBar();
 			panelTituloProgreso.add(progressBar);
 		
-		//aqui meto los distintos paneles de cada tipo de respuesta
-		JLayeredPane layeredPane = new JLayeredPane();
+		
+		layeredPane = new JLayeredPane();
 		frmResponderCuestionario.getContentPane().add(layeredPane, BorderLayout.CENTER);
+		layeredPane.setLayout(null);
+		
+		
+		//layeredPane.setLayer(Component, int);//Cambia la capa del componente. El segundo  argumento indica la capa
 		
 			//panel para preguntas de tipo test
 			JPanel panelPregTest = new JPanel();
@@ -161,6 +171,7 @@ public class ResponderCuestionario {
 				textField.setColumns(10);
 
 		
+				
 		//panel de los botones
 		JPanel panelBotones = new JPanel();
 		frmResponderCuestionario.getContentPane().add(panelBotones, BorderLayout.SOUTH);
@@ -178,9 +189,27 @@ public class ResponderCuestionario {
 			JButton btnSiguiente = new JButton("Siguiente");
 			btnAnterior.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					//guardo la respuesta en respuestas
+					String[] unaRes=null;
+					if(layeredPane.getLayout().toString().equals("panelPregLarga")){
+						unaRes[0]="corta_larga";
+						//unaRes[1]=lblPreguntaLarga.getText();
+						//respuestas.add();
+					}else if(layeredPane.getLayout().toString().equals("panelPregSatis")){
+						
+					}else if(layeredPane.getLayout().toString().equals("panelPregTest")){
+						
+					}
 				}
 			});
 			panelBotones.add(btnSiguiente);
 				
 	}
+	private String[] obtenerPregunta(){
+		String[] pregunta = null;//en la pos pregunta(0) se indica el tipo de pregunta
+		
+		return pregunta;
+		
+	}
+	
 }
