@@ -19,6 +19,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import logica.Cuestionario;
+import logica.GestorCuestionarios;
+import logica.Pregunta;
+import logica.PreguntaTest;
 
 import javax.swing.JRadioButton;
 import javax.swing.JLayeredPane;
@@ -40,14 +43,19 @@ public class ResponderCuestionario {
 	private JTextField textRespLarga;
 	private JTextField textField;
 	private JLayeredPane layeredPane;//aqui meto los distintos paneles de cada tipo de respuesta
-	private LinkedList<String[]> respuestas=new LinkedList<String[]>() ;
-
-/*
+	
+	//en String[] habra: 0->idpreg, 1->tipo ,2 ->pregunta, n-1->posi resp del tipo, n->resp
+	private LinkedList<String[]> pregRes=new LinkedList<String[]>();
+	private String[] auxpre;//aqui se va a encontrar solo la pregunta q se va a ver en el momento
+	private int indicePreg;
+/**/
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ResponderCuestionario window = new ResponderCuestionario();
+					LinkedList<Cuestionario> x =GestorCuestionarios.getGestorCuestionarios().obtenerCuestionarios();
+					Cuestionario c=x.get(0);
+					ResponderCuestionario window = new ResponderCuestionario(c, "hpaz");
 					window.frmResponderCuestionario.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,10 +63,14 @@ public class ResponderCuestionario {
 			}
 		});
 	}
-*/
+
 	//constructora
 	public ResponderCuestionario(Cuestionario pCuestionario, String pUsuario) {
 		cuestionario=pCuestionario;
+		indicePreg=0;
+		rellenarLista();// relleno la lista pregRes=new LinkedList<String[]>()
+		auxpre=pregRes.get(indicePreg);
+		
 		initialize();
 	}
 
@@ -92,72 +104,95 @@ public class ResponderCuestionario {
 		layeredPane.setLayout(null);
 		
 		
-		//layeredPane.setLayer(Component, int);//Cambia la capa del componente. El segundo  argumento indica la capa
+		//panel para preguntas de tipo test
+		JPanel panelPregTest = new JPanel();
+		panelPregTest.setBounds(0, 0, 433, 228);
+		layeredPane.add(panelPregTest);
+		panelPregTest.setLayout(new BoxLayout(panelPregTest, BoxLayout.Y_AXIS));
 		
-			//panel para preguntas de tipo test
-			JPanel panelPregTest = new JPanel();
-			panelPregTest.setBounds(0, 0, 433, 228);
-			layeredPane.add(panelPregTest);
-			panelPregTest.setLayout(new BoxLayout(panelPregTest, BoxLayout.Y_AXIS));
+		//panel para preguntas de tipo satisfaccion
+		JPanel panelPregSatis = new JPanel();
+		panelPregSatis.setBounds(0, 0, 433, 228);
+		layeredPane.add(panelPregSatis);
+		panelPregSatis.setLayout(new BoxLayout(panelPregSatis, BoxLayout.Y_AXIS));
+		
+		//panel para pregunta larga
+		JPanel panelPregLarga = new JPanel();
+		panelPregLarga.setBounds(0, 0, 433, 228);
+		layeredPane.add(panelPregLarga);
+		panelPregLarga.setLayout(new BoxLayout(panelPregLarga, BoxLayout.Y_AXIS));
+		
+		
+		
+		if(auxpre[1].equals("test")){//en String[] habra: 0->idpreg, 1->tipo ,2 ->pregunta, n-1->posi resp del tipo, n->resp
 			
-				JLabel lblPreguntaTest = new JLabel("");
-				panelPregTest.add(lblPreguntaTest);
-				
-				JRadioButton rdbtnResUno = new JRadioButton("");
-				panelPregTest.add(rdbtnResUno);
-				
-				JRadioButton rdbtnResDos = new JRadioButton("");
-				panelPregTest.add(rdbtnResDos);
-				
-				JRadioButton rdbtnResTres = new JRadioButton("");
-				panelPregTest.add(rdbtnResTres);
-				
-				JRadioButton rdbtnResCuatro = new JRadioButton("");
-				panelPregTest.add(rdbtnResCuatro);
+			//esto cambia las capas para q se vea solo el panel que quiero mostrar
+			layeredPane.setLayer(panelPregTest, new Integer(2));//Cambia la capa del componente. El segundo  argumento indica la capa
+			layeredPane.setLayer(panelPregSatis, new Integer(1));//Cambia la capa del componente. El segundo  argumento indica la capa
+			layeredPane.setLayer(panelPregLarga, new Integer(0));//Cambia la capa del componente. El segundo  argumento indica la capa
 			
-			
-			//panel para preguntas de tipo satisfaccion
-			JPanel panelPregSatis = new JPanel();
-			panelPregSatis.setBounds(0, 0, 433, 228);
-			layeredPane.add(panelPregSatis);
-			panelPregSatis.setLayout(new BoxLayout(panelPregSatis, BoxLayout.Y_AXIS));
-			
-				JLabel lblPreguntaSatis = new JLabel("New label");
-				panelPregSatis.add(lblPreguntaSatis);
-				
-				JRadioButton rdbtnUno = new JRadioButton("1");
-				panelPregSatis.add(rdbtnUno);
-				
-				JRadioButton rdbtnDos = new JRadioButton("2");
-				panelPregSatis.add(rdbtnDos);
-				
-				JRadioButton rdbtnTres = new JRadioButton("3");
-				panelPregSatis.add(rdbtnTres);
-				
-				JRadioButton rdbtnCuatro = new JRadioButton("4");
-				panelPregSatis.add(rdbtnCuatro);
-				
-				JRadioButton rdbtnCinco = new JRadioButton("5");
-				panelPregSatis.add(rdbtnCinco);
+			JLabel lblPreguntaTest = new JLabel(auxpre[2]);
+			panelPregTest.add(lblPreguntaTest);
+
+			JRadioButton rdbtnResUno = new JRadioButton(auxpre[3]);
+			panelPregTest.add(rdbtnResUno);
+
+			JRadioButton rdbtnResDos = new JRadioButton(auxpre[4]);
+			panelPregTest.add(rdbtnResDos);
+
+			JRadioButton rdbtnResTres = new JRadioButton(auxpre[5]);
+			panelPregTest.add(rdbtnResTres);
+
+			JRadioButton rdbtnResCuatro = new JRadioButton(auxpre[5]);
+			panelPregTest.add(rdbtnResCuatro);
 			
 
+		}else if(auxpre[1].equals("satisfaccion")){//en String[] habra: 0->idpreg, 1->tipo ,2 ->pregunta, n-1->posi resp del tipo, n->resp
 			
-			//panel para pregunta larga
-			JPanel panelPregLarga = new JPanel();
-			panelPregLarga.setBounds(0, 0, 433, 228);
-			layeredPane.add(panelPregLarga);
-			panelPregLarga.setLayout(new BoxLayout(panelPregLarga, BoxLayout.Y_AXIS));
-			
-				JLabel lblPreguntaLarga = new JLabel("New label");
-				panelPregLarga.add(lblPreguntaLarga);
-				
-				textRespLarga = new JTextField();
-				panelPregLarga.add(textRespLarga);
-				textRespLarga.setColumns(30);
-			
+			//esto cambia las capas para q se vea solo el panel que quiero mostrar
+			layeredPane.setLayer(panelPregTest, new Integer(0));//Cambia la capa del componente. El segundo  argumento indica la capa
+			layeredPane.setLayer(panelPregSatis, new Integer(2));//Cambia la capa del componente. El segundo  argumento indica la capa
+			layeredPane.setLayer(panelPregLarga, new Integer(1));//Cambia la capa del componente. El segundo  argumento indica la capa
 
+			JLabel lblPreguntaSatis = new JLabel(auxpre[2]);
+			panelPregSatis.add(lblPreguntaSatis);
+
+			JRadioButton rdbtnUno = new JRadioButton("1");
+			panelPregSatis.add(rdbtnUno);
+
+			JRadioButton rdbtnDos = new JRadioButton("2");
+			panelPregSatis.add(rdbtnDos);
+
+			JRadioButton rdbtnTres = new JRadioButton("3");
+			panelPregSatis.add(rdbtnTres);
+
+			JRadioButton rdbtnCuatro = new JRadioButton("4");
+			panelPregSatis.add(rdbtnCuatro);
+
+			JRadioButton rdbtnCinco = new JRadioButton("5");
+			panelPregSatis.add(rdbtnCinco);
+
+		}else if(auxpre[1].equals("corta_larga")){//en String[] habra: 0->idpreg, 1->tipo ,2 ->pregunta, n-1->posi resp del tipo, n->resp
 			
-			//panel para pregunta corta
+			//esto cambia las capas para q se vea solo el panel que quiero mostrar
+			layeredPane.setLayer(panelPregTest, new Integer(0));//Cambia la capa del componente. El segundo  argumento indica la capa
+			layeredPane.setLayer(panelPregSatis, new Integer(1));//Cambia la capa del componente. El segundo  argumento indica la capa
+			layeredPane.setLayer(panelPregLarga, new Integer(2));//Cambia la capa del componente. El segundo  argumento indica la capa
+			
+			JLabel lblPreguntaLarga = new JLabel(auxpre[2]);
+			panelPregLarga.add(lblPreguntaLarga);
+
+			textRespLarga = new JTextField();
+			panelPregLarga.add(textRespLarga);
+			textRespLarga.setColumns(30);
+		}
+		
+				
+			/*esta la he quitado porq da lo mismo no tiene sentido diferenciarla las pantallas seran iguales
+			 * 
+			 * 
+			 * //panel para pregunta corta
+				
 			JPanel panelPregCorta = new JPanel();
 			panelPregCorta.setBounds(0, 0, 433, 228);
 			layeredPane.add(panelPregCorta);
@@ -169,8 +204,7 @@ public class ResponderCuestionario {
 				textField = new JTextField();
 				panelPregCorta.add(textField);
 				textField.setColumns(10);
-
-		
+			 */
 				
 		//panel de los botones
 		JPanel panelBotones = new JPanel();
@@ -181,6 +215,8 @@ public class ResponderCuestionario {
 			JButton btnAnterior = new JButton("Anterior");
 			btnAnterior.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					indicePreg--;
+					
 				}
 			});
 			panelBotones.add(btnAnterior);
@@ -189,26 +225,41 @@ public class ResponderCuestionario {
 			JButton btnSiguiente = new JButton("Siguiente");
 			btnAnterior.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					//guardo la respuesta en respuestas
-					String[] unaRes=null;
-					if(layeredPane.getLayout().toString().equals("panelPregLarga")){
-						unaRes[0]="corta_larga";
-						//unaRes[1]=lblPreguntaLarga.getText();
-						//respuestas.add();
-					}else if(layeredPane.getLayout().toString().equals("panelPregSatis")){
-						
-					}else if(layeredPane.getLayout().toString().equals("panelPregTest")){
-						
-					}
+					
+					indicePreg++;
 				}
 			});
 			panelBotones.add(btnSiguiente);
 				
 	}
-	private String[] obtenerPregunta(){
-		String[] pregunta = null;//en la pos pregunta(0) se indica el tipo de pregunta
+	private String[] obtenerPregunta(int pIndice){
+		String[] pregunta = null;
 		
 		return pregunta;
+		
+	}
+	private void rellenarLista(){
+		//en String[] habra: 0->idpreg, 1->tipo ,2 ->pregunta, n-1->posi resp del tipo, n->resp
+		LinkedList<Pregunta> lp = cuestionario.getPreguntas();
+		for (Pregunta pregunta : lp) {
+			//modelo.addElement(pregunta);
+			String[] p=null;
+			p[0]=""+pregunta.getId();
+			p[1]=pregunta.getTipoPreg();
+			p[2]=pregunta.getTitulo();
+			if(p[1].equals("test")){
+				PreguntaTest pt=(PreguntaTest) pregunta;
+				String [] res=pt.getRespuestasPosibles();
+				p[3]=res[0];
+				p[4]=res[1];
+				p[5]=res[2];
+				p[6]=res[3];
+			}
+			pregRes.add(p);
+		}
+			
+	}
+	private void refrescar(){
 		
 	}
 	
