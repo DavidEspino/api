@@ -1,5 +1,7 @@
 package logica;
 
+import java.io.ObjectInputStream.GetField;
+
 public class PreguntaTest extends Pregunta {
 	
 	private String[] respuestasPosibles;
@@ -7,6 +9,9 @@ public class PreguntaTest extends Pregunta {
 	public PreguntaTest(int pId, String pTitulo, String[] pRespuestasPosibles) {
 		super(pId, pTitulo);
 		respuestasPosibles = pRespuestasPosibles;
+	}
+	public String[] getRespuestasPosibles(){
+		return respuestasPosibles;
 	}
 
 }

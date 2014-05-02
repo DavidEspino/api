@@ -1,7 +1,10 @@
 package logica;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 public class Pregunta {
@@ -41,14 +44,14 @@ public class Pregunta {
 	/**
 	 * @author HelenJ
 	 */
-	public String getTipoPreg(int pIdPregunta){
+	public String getTipoPreg(){
 		String tipo="";
 		
 		try {
 			int cont=2;	
 			String sql = "SELECT tipo "
 							+ "FROM preguntas "
-							+ "WHERE idPregunta = "+pIdPregunta+";";
+							+ "WHERE idPregunta = "+this.getId()+";";
 			ResultSet resul = BD.getInstance().consulta(sql);
 			tipo=resul.getString("tipo");
 		} catch (SQLException e) {
@@ -61,10 +64,20 @@ public class Pregunta {
 	/**
 	 * @author HelenJ
 	 */
-	private void anadirRespuesta(String pResp, String pUsuario){
+	private void anadirRespuesta(int pIdCuesti, String pResp, String pUsuario){
 		try {
-			String sql = "INSERT INTO `respuesta`(`idPreg`, `respuesta`, `idusuariocontesta`) VALUES ("+this.id+",'"+pResp+",'"+pUsuario+"')";
+			String sql = "INSERT INTO `respuesta`(`idPreg`, `respuesta`, `idusuariocontesta`) "
+					   + "VALUES ("+this.id+",'"+pResp+",'"+pUsuario+"');";
 			BD.getInstance().insertar(sql);
+			
+			//obtengo la fecha actual
+			Calendar fecha = new GregorianCalendar();
+			String f=""+fecha.get(Calendar.DAY_OF_MONTH)+""+fecha.get(Calendar.MONTH)+""+fecha.get(Calendar.YEAR)+"";
+			
+			sql="INSERT INTO `usucontestacuesti`(`nomUsu`, `idCuesti`, `fecha`) "
+			  + "VALUES ('"+pUsuario+"',"+pIdCuesti+",'"+f+"');";
+			BD.getInstance().insertar(sql);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -73,5 +86,5 @@ public class Pregunta {
 	public LinkedList<String> getRespuestas() {
 		return this.listaRespuestas;
 	}
-
+	
 }
