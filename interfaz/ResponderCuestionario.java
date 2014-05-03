@@ -216,6 +216,9 @@ public class ResponderCuestionario {
 				}else{
 					anadirRespuestas();
 					//volver a pantalla anter
+					//ConsultarCuestionario frame = new ConsultarCuestionario(usuario, tipo);
+					//frame.getFrmConsultarCuestionario().setVisible(true);
+					frmResponderCuestionario.dispose();
 				}
 			}
 

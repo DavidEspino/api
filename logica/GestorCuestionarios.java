@@ -135,7 +135,7 @@ public class GestorCuestionarios {
 		int id = 0;
 		//obtengo la fecha actual
 		Calendar fecha = new GregorianCalendar();
-		String f=""+fecha.get(Calendar.DAY_OF_MONTH)+"-"+fecha.get(Calendar.MONTH)+"-"+fecha.get(Calendar.YEAR)+"";
+		String f=""+fecha.get(Calendar.DAY_OF_MONTH)+"-"+fecha.get(Calendar.MONTH)+"-"+fecha.get(Calendar.YEAR)+" "+fecha.get(Calendar.HOUR_OF_DAY)+":"+fecha.get(Calendar.MINUTE);
 		String sql="INSERT INTO `usucontestacuesti`(`nomUsu`, `idCuesti`, `fecha`) VALUES ('"+pUsuario+"',"+pIdCuesti+",'"+f+"');";
 		try {
 			BD.getInstance().insertar(sql);
