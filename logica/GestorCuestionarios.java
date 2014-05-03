@@ -150,4 +150,122 @@ public class GestorCuestionarios {
 		return id;
 	}
 	
+	public void anadirPreguntaACuestionario(int idPregunta, int idCuestionario){
+		try {
+			String sql = "INSERT INTO `cuesticontienepreg`(`idCuesti`, `idPreg`) VALUES ("+idCuestionario+","+idPregunta+");";
+			BD.getInstance().insertar(sql);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	public void eliminarPreguntaDeCuestionario(int idPregunta, int idCuestionario){
+		try {
+			BD.getInstance().borrar("delete from cuesticontienepreg where idPreg =" + idPregunta + " and idCuesti=" +idCuestionario +";");
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void nuevoCuestionario(String nombreCuestionario, String nombreUsuario) {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "INSERT INTO `cuestionario`(`titulo`, `usuCreador`) VALUES ('"+nombreCuestionario+"','"+nombreUsuario+"');";
+			BD.getInstance().insertar(sql);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	public void modificarCuestionario(String nombreCuestionario, int idCuestionario) {
+		// TODO Auto-generated method stub
+		try {
+			String sql ="UPDATE `cuestionario` SET `titulo`='"+nombreCuestionario+"' where `idCuestionario`='"+idCuestionario+"';";
+			BD.getInstance().actualizar(sql);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	
+	
+	//Metodos para añadir preguntas
+	public int obtenerIdPregunta(String pregunta, String tipo){
+		String consulta = "select idPregunta from preguntas where pregunta='"+pregunta+"' and tipo='" +tipo +"';";
+		int id=-1;
+		try {
+			ResultSet sql = BD.getInstance().consulta(consulta);
+			while(sql.next()){
+				id = sql.getInt("idPregunta");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
+	
+	public void anadirPreguntaCorta(String pregunta, int idCuestionario) {
+		try {
+			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','corta_larga');";
+			BD.getInstance().insertar(sql);
+			int id = obtenerIdPregunta(pregunta, "corta_larga");
+			anadirPreguntaACuestionario(id, idCuestionario);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void anadirPreguntaLarga(String pregunta, int idCuestionario) {
+		try {
+			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','corta_larga');";
+			BD.getInstance().insertar(sql);
+			int id = obtenerIdPregunta(pregunta, "corta_larga");
+			anadirPreguntaACuestionario(id, idCuestionario);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void anadirPreguntaSatisfaccion(String pregunta, int idCuestionario) {
+		try {
+			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','satisfaccion');";
+			BD.getInstance().insertar(sql);
+			int id = obtenerIdPregunta(pregunta, "satisfaccion");
+			anadirPreguntaACuestionario(id, idCuestionario);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void anadirPreguntaTest(String pregunta,
+			String respuesta1, String respuesta2,
+			String respuesta3, String respuesta4,
+			int idCuestionario) {
+		
+		try {
+			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','test');";
+			BD.getInstance().insertar(sql);
+			int id = obtenerIdPregunta(pregunta, "test");
+			anadirRespuestasTest(id, respuesta1, respuesta2, respuesta3, respuesta4);
+			anadirPreguntaACuestionario(id, idCuestionario);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void anadirRespuestasTest(int id, String respuesta1,
+			String respuesta2, String respuesta3, String respuesta4) {
+		try {
+			String sql = "INSERT INTO `preguntatipotest`(`idPreg`, `pregUno`, `pregDos`, `pregTres`, `pregCuatro`) VALUES ("+id+",'"+respuesta1+"','"+respuesta2+"','"+respuesta3+"','"+respuesta4+"');";
+			BD.getInstance().insertar(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	
 }

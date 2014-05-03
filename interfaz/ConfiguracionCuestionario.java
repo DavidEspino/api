@@ -70,6 +70,9 @@ public class ConfiguracionCuestionario extends JFrame {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		frmConfiguracinCuestionario.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
+		
+		
+		//Tabla mas actualizarla
 		final LinkedList<Cuestionario> listaCuestionarios = GestorCuestionarios.getGestorCuestionarios().obtenerCuestionariosUsuario(usuario);
 		
 		String[] columnNames = {"Cuestionarios", "Nº Preguntas"};
@@ -79,8 +82,6 @@ public class ConfiguracionCuestionario extends JFrame {
 			data[i][0]= listaCuestionarios.get(i).getNombre();
 			data[i][1]= listaCuestionarios.get(i).getPreguntas().size();
 		}
-		
-		
 		
 		table = new JTable(data, columnNames);
 		scrollPane.setViewportView(table);
