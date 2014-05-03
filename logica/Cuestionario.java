@@ -28,7 +28,7 @@ public class Cuestionario {
 			ResultSet subsql1, subsql2, sql = BD.getInstance().consulta(consulta);
 			while(sql.next()){
 				//sacamos el titulo y el id de las preguntas
-				titulo = sql.getString("titulo");
+				titulo = sql.getString("pregunta");
 				idP = sql.getInt("idPregunta");
 				//miramos si la pregunta es de satisfacción
 				subconsulta1 =  "select rango from preguntatiposatis where idPreg='"+idP+"';";
@@ -60,7 +60,6 @@ public class Cuestionario {
 			}
 			BD.getInstance().cerrarConsulta(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -77,9 +76,9 @@ public class Cuestionario {
 		return this.listaPreguntas;
 	}
 	
-	private int getNumPreguntas(){
+	/*private int getNumPreguntas(){
 		return listaPreguntas.size();
-	}
+	}*/
 	
 	
 	

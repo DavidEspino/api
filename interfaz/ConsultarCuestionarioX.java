@@ -23,6 +23,7 @@ public class ConsultarCuestionarioX {
 	private LinkedList<Pregunta> lp;
 	private int act;
 	private DefaultListModel<String> modelo;
+	private JLabel lblTitulo;
 
 	/**
 	 * Launch the application.
@@ -92,7 +93,7 @@ public class ConsultarCuestionarioX {
 		JPanel panel_norte = new JPanel();
 		frmConsultarCuestionarioX.getContentPane().add(panel_norte, BorderLayout.NORTH);
 		
-		JLabel lblTitulo = new JLabel("Titulo pregunta");
+		lblTitulo = new JLabel("Titulo pregunta");
 		panel_norte.add(lblTitulo);
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -111,6 +112,7 @@ public class ConsultarCuestionarioX {
 	}
 
 	private void actualizarModelo(int act) {
+		lblTitulo.setText(lp.get(act).getTitulo());
 		modelo.removeAllElements();
 		LinkedList<String> listaRespuestas = lp.get(act).getRespuestas();
 		for (String string : listaRespuestas) {

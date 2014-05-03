@@ -2,7 +2,6 @@ package logica;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
@@ -25,12 +24,12 @@ public class GestorCuestionarios {
 		int id;
 		Cuestionario c;
 		LinkedList<Cuestionario> rdo = new LinkedList<Cuestionario>();
-		String consulta = "select nombre, id from cuestionario;";
+		String consulta = "select titulo, idCuestionario from cuestionario;";
 		try {
 			ResultSet sql = BD.getInstance().consulta(consulta);
 			while(sql.next()){
-				nombre = sql.getString("nombre");
-				id = sql.getInt("id");
+				nombre = sql.getString("titulo");
+				id = sql.getInt("idCuestionario");
 				c = new Cuestionario(id, nombre);
 				rdo.add(c);
 			}
@@ -122,23 +121,33 @@ public class GestorCuestionarios {
 	/**
 	 * @author HelenJ
 	 */
-	public void anadirRespuestaBD(int pIdCuesti,int pIdPre, String pResp, String pUsuario){
+	public void anadirRespuestaBD(int pIdCuesti,int pIdPre, String pResp, int pIdUsuario){
 		try {
-			String sql = "INSERT INTO `respuesta`(`idPreg`, `respuesta`, `idusuariocontesta`) "
-					   + "VALUES ("+pIdPre+",'"+pResp+",'"+pUsuario+"');";
-			BD.getInstance().insertar(sql);
-			
-			//obtengo la fecha actual
-			Calendar fecha = new GregorianCalendar();
-			String f=""+fecha.get(Calendar.DAY_OF_MONTH)+""+fecha.get(Calendar.MONTH)+""+fecha.get(Calendar.YEAR)+"";
-			
-			sql="INSERT INTO `usucontestacuesti`(`nomUsu`, `idCuesti`, `fecha`) "
-			  + "VALUES ('"+pUsuario+"',"+pIdCuesti+",'"+f+"');";
-			BD.getInstance().insertar(sql);
-			
+			String sql = "INSERT INTO `respuesta`(`idPreg`, `respuesta`, `idusuariocontesta`) VALUES ('"+pIdPre+"','"+pResp+"','"+pIdUsuario+"');";
+			System.out.println(sql);
+			BD.getInstance().actualizar(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int crearRegistroRespuesta(String pUsuario, int pIdCuesti){
+		int id = 0;
+		//obtengo la fecha actual
+		Calendar fecha = new GregorianCalendar();
+		String f=""+fecha.get(Calendar.DAY_OF_MONTH)+"-"+fecha.get(Calendar.MONTH)+"-"+fecha.get(Calendar.YEAR)+"";
+		String sql="INSERT INTO `usucontestacuesti`(`nomUsu`, `idCuesti`, `fecha`) VALUES ('"+pUsuario+"',"+pIdCuesti+",'"+f+"');";
+		try {
+			BD.getInstance().insertar(sql);
+			sql = "SELECT id FROM usucontestacuesti WHERE nomusu = '"+pUsuario+"' and idCuesti='"+pIdCuesti+"' and fecha='"+f+"';";
+			ResultSet rs = BD.getInstance().consulta(sql);
+			rs.next();
+			id = rs.getInt("id");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id;
 	}
 	
 }

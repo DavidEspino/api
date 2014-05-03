@@ -1,21 +1,21 @@
 package interfaz;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+
 import logica.Cuestionario;
 import logica.Pregunta;
-
-import javax.swing.JList;
 
 public class CuestionarioX {
 
@@ -62,9 +62,13 @@ public class CuestionarioX {
 		frmCuestionarioX.getContentPane().add(panel, BorderLayout.SOUTH);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnConsultarSeleccion = new JButton("Consultar Seleccion");
+		/*JButton btnConsultarSeleccion = new JButton("Consultar Seleccion");
+		btnConsultarSeleccion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		panel.add(btnConsultarSeleccion);
-		
+		*/
 		JButton btnCancelar = new JButton("Cancelar");
 		panel.add(btnCancelar);
 		

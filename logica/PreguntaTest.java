@@ -1,6 +1,5 @@
 package logica;
 
-import java.io.ObjectInputStream.GetField;
 
 public class PreguntaTest extends Pregunta {
 	

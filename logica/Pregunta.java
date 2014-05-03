@@ -1,10 +1,7 @@
 package logica;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 public class Pregunta {
@@ -18,6 +15,11 @@ public class Pregunta {
 		this.id = pId;
 		titulo = pTitulo;	
 		cargarRespuestas();
+	}
+	
+	@Override
+	public String toString() {
+		return titulo;
 	}
 
 	public void cargarRespuestas(){
@@ -48,11 +50,9 @@ public class Pregunta {
 		String tipo="";
 		
 		try {
-			int cont=2;	
-			String sql = "SELECT tipo "
-							+ "FROM preguntas "
-							+ "WHERE idPregunta = "+this.getId()+";";
+			String sql = "SELECT tipo FROM preguntas WHERE idPregunta = "+this.getId()+";";
 			ResultSet resul = BD.getInstance().consulta(sql);
+			resul.next();
 			tipo=resul.getString("tipo");
 		} catch (SQLException e) {
 			e.printStackTrace();

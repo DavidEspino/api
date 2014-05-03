@@ -1,59 +1,63 @@
 package interfaz;
 
-import java.awt.EventQueue;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import java.awt.Font;
-
-import javax.swing.JSeparator;
-import javax.swing.JButton;
-
-import java.awt.BorderLayout;
-
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JProgressBar;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 import logica.Cuestionario;
 import logica.GestorCuestionarios;
 import logica.Pregunta;
 import logica.PreguntaTest;
 
-import javax.swing.JRadioButton;
-import javax.swing.JLayeredPane;
-import javax.swing.BoxLayout;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.util.LinkedList;
-
-import javax.swing.JTextPane;
-import javax.swing.JTextField;
-import javax.swing.JProgressBar;
-
 public class ResponderCuestionario {
 
 	private JFrame frmResponderCuestionario;
 	private Cuestionario cuestionario;
-	private JTextField textRespLarga;
-	private JTextField textField;
 	private JLayeredPane layeredPane;//aqui meto los distintos paneles de cada tipo de respuesta
 	private JPanel panelPregTest;
 	private JPanel panelPregSatis;
 	private JPanel panelPregLarga;
 	private JPanel panelTituloProgreso;
 	private JProgressBar progressBar;
+	private JButton btnSiguiente;
+	
+	//preguntas test
+	private JLabel lblPreguntaTest;
+	private JRadioButton rdbtnResUno;
+	private JRadioButton rdbtnResDos;
+	private JRadioButton rdbtnResTres;
+	private JRadioButton rdbtnResCuatro;
+	
+	//preguntas satisfaccion
+	private JLabel lblPreguntaSatis;
+	private JRadioButton rdbtnUno;
+	private JRadioButton rdbtnDos;
+	private JRadioButton rdbtnTres;
+	private JRadioButton rdbtnCuatro;
+	private JRadioButton rdbtnCinco;
+	
+	//preguntas largas
+	private JLabel lblPreguntaLarga;
+	private JTextField textRespLarga;
 	
 	//en String[] habra: 0->idpreg, 1->tipo ,2 ->pregunta, n-1->posi resp del tipo, n->resp
 	private LinkedList<String[]> pregRes=new LinkedList<String[]>();
 	private String[] auxpre=new String[0];//aqui se va a encontrar solo la pregunta q se va a ver en el momento
 	private int indicePreg;
 	private String user;
+	private int idUsuario;
 	
 	/*
 	public static void main(String[] args) {
@@ -101,10 +105,10 @@ public class ResponderCuestionario {
 		frmResponderCuestionario.getContentPane().add(panelTituloProgreso, BorderLayout.NORTH);
 		panelTituloProgreso.setLayout(new BoxLayout(panelTituloProgreso, BoxLayout.X_AXIS));
 		String tituloCuestionario=cuestionario.getNombre();
-		JLabel lblTiruloCuestionario = new JLabel(tituloCuestionario);
-		panelTituloProgreso.add(lblTiruloCuestionario);
+		JLabel lblTituloCuestionario = new JLabel(tituloCuestionario);
+		panelTituloProgreso.add(lblTituloCuestionario);
 
-		progressBar.setMaximum(100);
+		progressBar.setMaximum(100);//TODO
 		progressBar.setMinimum(0);
 		//JProgressBar progressBar = new JProgressBar();
 
@@ -119,18 +123,56 @@ public class ResponderCuestionario {
 		panelPregTest.setBounds(0, 0, 433, 228);
 		layeredPane.add(panelPregTest);
 		panelPregTest.setLayout(new BoxLayout(panelPregTest, BoxLayout.Y_AXIS));
+		lblPreguntaTest = new JLabel("");
+		panelPregTest.add(lblPreguntaTest);
+
+		rdbtnResUno = new JRadioButton("");
+		panelPregTest.add(rdbtnResUno);
+
+		rdbtnResDos = new JRadioButton("");
+		panelPregTest.add(rdbtnResDos);
+
+		rdbtnResTres = new JRadioButton("");
+		panelPregTest.add(rdbtnResTres);
+
+		rdbtnResCuatro = new JRadioButton("");
+		panelPregTest.add(rdbtnResCuatro);
+		
 
 		//panel para preguntas de tipo satisfaccion
 		panelPregSatis = new JPanel();
 		panelPregSatis.setBounds(0, 0, 433, 228);
 		layeredPane.add(panelPregSatis);
 		panelPregSatis.setLayout(new BoxLayout(panelPregSatis, BoxLayout.Y_AXIS));
+		lblPreguntaSatis = new JLabel("");
+		panelPregSatis.add(lblPreguntaSatis);
+
+		rdbtnUno = new JRadioButton("1");
+		panelPregSatis.add(rdbtnUno);
+
+		rdbtnDos = new JRadioButton("2");
+		panelPregSatis.add(rdbtnDos);
+
+		rdbtnTres = new JRadioButton("3");
+		panelPregSatis.add(rdbtnTres);
+
+		rdbtnCuatro = new JRadioButton("4");
+		panelPregSatis.add(rdbtnCuatro);
+
+		rdbtnCinco = new JRadioButton("5");
+		panelPregSatis.add(rdbtnCinco);
 
 		//panel para pregunta larga
 		panelPregLarga = new JPanel();
 		panelPregLarga.setBounds(0, 0, 433, 228);
 		layeredPane.add(panelPregLarga);
 		panelPregLarga.setLayout(new BoxLayout(panelPregLarga, BoxLayout.Y_AXIS));
+		lblPreguntaLarga = new JLabel("");
+		panelPregLarga.add(lblPreguntaLarga);
+
+		textRespLarga = new JTextField();
+		panelPregLarga.add(textRespLarga);
+		textRespLarga.setColumns(30);
 
 		cargarPanelPregunta();
 
@@ -143,48 +185,94 @@ public class ResponderCuestionario {
 		JButton btnAnterior = new JButton("Anterior");
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				indicePreg--;
-				auxpre=pregRes.get(indicePreg);
-				actualizarBarra();
-				cargarPanelPregunta();
+				if(indicePreg>0){
+					indicePreg--;
+					auxpre=pregRes.get(indicePreg);
+					actualizarBarra();
+					cargarPanelPregunta();
+				}
 			}
 		});
 		panelBotones.add(btnAnterior);
 
 		//muestra la siguiente pregunta
-		final JButton btnSiguiente = new JButton("Siguiente");
-		btnAnterior.addActionListener(new ActionListener() {
+		btnSiguiente = new JButton("Siguiente");
+		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Action perfomed");
+				String respuesta = obtenerRespuesta();
+				pregRes.get(indicePreg)[pregRes.get(indicePreg).length-1]=respuesta;
 				if(btnSiguiente.getText().equals("Siguiente")){
-					if(indicePreg==pregRes.size()){
+					System.out.println("Siguiente");
+					if(indicePreg==pregRes.size()-2){
+						System.out.println("Pregunta = size-2");
 						btnSiguiente.setText("Finalizar");
-					}else{
+					}
 						indicePreg++;
 						auxpre=pregRes.get(indicePreg);
 						actualizarBarra();
 						cargarPanelPregunta();
-					}
 					//panelTituloProgreso.add(progressBar);
 				}else{
 					anadirRespuestas();
 					//volver a pantalla anter
 				}
 			}
+
+			
 		});
 		panelBotones.add(btnSiguiente);
+		
+		idUsuario = GestorCuestionarios.getGestorCuestionarios().crearRegistroRespuesta(user, cuestionario.getId());
+		
+		frmResponderCuestionario.setVisible(true);
 
 	}
-	private String[] obtenerPregunta(int pIndice){
+	
+	private String obtenerRespuesta() {
+		String rdo= "";
+		if(auxpre[1].equals("test")){
+			if(rdbtnResUno.isSelected()){
+				rdo=rdbtnResUno.getText();
+			}else if(rdbtnResDos.isSelected()){
+				rdo=rdbtnResDos.getText();
+			}else if(rdbtnResTres.isSelected()){
+				rdo = rdbtnResTres.getText();
+			}else if(rdbtnResCuatro.isSelected()){
+				rdo = rdbtnResCuatro.getText();
+			}
+		}else if(auxpre[1].equals("satisfaccion")){
+			if(rdbtnUno.isSelected()){
+				rdo = rdbtnUno.getText();
+			}else if(rdbtnDos.isSelected()){
+				rdo = rdbtnDos.getText();
+			}else if(rdbtnTres.isSelected()){
+				rdo = rdbtnTres.getText();
+			}else if(rdbtnCuatro.isSelected()){
+				rdo = rdbtnCuatro.getText();
+			}else if(rdbtnCinco.isSelected()){
+				rdo = rdbtnCinco.getText();
+			}
+		}else if(auxpre[1].equals("corta_larga")){
+			rdo = textRespLarga.getText();
+		}
+		return rdo;
+	}
+	
+	
+	/*private String[] obtenerPregunta(int pIndice){
 		String[] pregunta = new String[0];
 		pregunta=pregRes.get(pIndice);
 		return pregunta;
-	}
+	}*/
+	
+	
 	private void rellenarLista(){
 		//en String[] habra: 0->idpreg, 1->tipo ,2 ->pregunta, n-1->posi resp del tipo, n->resp
 		
 		LinkedList<Pregunta> lp = cuestionario.getPreguntas();
 		for (Pregunta pregunta : lp) {
-			String[] p= new String[0];
+			String[] p= new String[8];//dejamos hueco para la respuesta
 			p[0]=""+pregunta.getId();
 			p[1]=pregunta.getTipoPreg();
 			p[2]=pregunta.getTitulo();
@@ -201,80 +289,107 @@ public class ResponderCuestionario {
 			
 	}
 	private void anadirRespuestas(){
-		String [] aux=null;
+		String [] aux;
 		for (int i = 0; i < pregRes.size(); i++) {
 			aux=pregRes.get(i);
 			//en String[] habra: 0->idpreg, 1->tipo ,2 ->pregunta, n-1->posi resp del tipo, n->resp
-			GestorCuestionarios.getGestorCuestionarios().anadirRespuestaBD(cuestionario.getId(), Integer.parseInt(aux[0]), aux[aux.length], user);
+			GestorCuestionarios.getGestorCuestionarios().anadirRespuestaBD(cuestionario.getId(), Integer.parseInt(aux[0]), aux[aux.length-1], idUsuario);
 		}
 	}
+	
+	
 	private void actualizarBarra(){
 		progressBar.setValue((indicePreg/pregRes.size())*100);
 		panelTituloProgreso.add(progressBar);
 	}
+	
+	
 	private void cargarPanelPregunta(){
+		System.out.println("CargarPregunta tipo= "+auxpre[1]);
 		
 		if(auxpre[1].equals("test")){//en String[] habra: 0->idpreg, 1->tipo ,2 ->pregunta, n-1->posi resp del tipo, n->resp
+			System.out.println("CargarPregunta: test");
 			
 			//esto cambia las capas para q se vea solo el panel que quiero mostrar
 			layeredPane.setLayer(panelPregTest, new Integer(2));//Cambia la capa del componente. El segundo  argumento indica la capa
 			layeredPane.setLayer(panelPregSatis, new Integer(1));//Cambia la capa del componente. El segundo  argumento indica la capa
 			layeredPane.setLayer(panelPregLarga, new Integer(0));//Cambia la capa del componente. El segundo  argumento indica la capa
-
-			JLabel lblPreguntaTest = new JLabel(auxpre[2]);
+			
+			lblPreguntaTest.setText(auxpre[2]);
+			rdbtnResUno.setText(auxpre[3]);
+			rdbtnResUno.setSelected(false);
+			rdbtnResDos.setText(auxpre[4]);
+			rdbtnResDos.setSelected(false);
+			rdbtnResTres.setText(auxpre[5]);
+			rdbtnResTres.setSelected(false);
+			rdbtnResCuatro.setText(auxpre[6]);
+			rdbtnResCuatro.setSelected(false);
+			
+			/*lblPreguntaTest = new JLabel(auxpre[2]);
 			panelPregTest.add(lblPreguntaTest);
 
-			JRadioButton rdbtnResUno = new JRadioButton(auxpre[3]);
+			rdbtnResUno = new JRadioButton(auxpre[3]);
 			panelPregTest.add(rdbtnResUno);
 
-			JRadioButton rdbtnResDos = new JRadioButton(auxpre[4]);
+			rdbtnResDos = new JRadioButton(auxpre[4]);
 			panelPregTest.add(rdbtnResDos);
 
-			JRadioButton rdbtnResTres = new JRadioButton(auxpre[5]);
+			rdbtnResTres = new JRadioButton(auxpre[5]);
 			panelPregTest.add(rdbtnResTres);
 
-			JRadioButton rdbtnResCuatro = new JRadioButton(auxpre[5]);
-			panelPregTest.add(rdbtnResCuatro);
+			rdbtnResCuatro = new JRadioButton(auxpre[5]);
+			panelPregTest.add(rdbtnResCuatro);*/
 
 
 		}else if(auxpre[1].equals("satisfaccion")){//en String[] habra: 0->idpreg, 1->tipo ,2 ->pregunta, n-1->posi resp del tipo, n->resp
+			System.out.println("CargarPregunta: staisfaccion");
 			
 			//esto cambia las capas para q se vea solo el panel que quiero mostrar
 			layeredPane.setLayer(panelPregTest, new Integer(0));//Cambia la capa del componente. El segundo  argumento indica la capa
 			layeredPane.setLayer(panelPregSatis, new Integer(2));//Cambia la capa del componente. El segundo  argumento indica la capa
 			layeredPane.setLayer(panelPregLarga, new Integer(1));//Cambia la capa del componente. El segundo  argumento indica la capa
+			
+			lblPreguntaSatis.setText(auxpre[2]);
+			rdbtnUno.setSelected(false);
+			rdbtnDos.setSelected(false);
+			rdbtnTres.setSelected(false);
+			rdbtnCuatro.setSelected(false);
 
-			JLabel lblPreguntaSatis = new JLabel(auxpre[2]);
+			/*lblPreguntaSatis = new JLabel(auxpre[2]);
 			panelPregSatis.add(lblPreguntaSatis);
 
-			JRadioButton rdbtnUno = new JRadioButton("1");
+			rdbtnUno = new JRadioButton("1");
 			panelPregSatis.add(rdbtnUno);
 
-			JRadioButton rdbtnDos = new JRadioButton("2");
+			rdbtnDos = new JRadioButton("2");
 			panelPregSatis.add(rdbtnDos);
 
-			JRadioButton rdbtnTres = new JRadioButton("3");
+			rdbtnTres = new JRadioButton("3");
 			panelPregSatis.add(rdbtnTres);
 
-			JRadioButton rdbtnCuatro = new JRadioButton("4");
+			rdbtnCuatro = new JRadioButton("4");
 			panelPregSatis.add(rdbtnCuatro);
 
-			JRadioButton rdbtnCinco = new JRadioButton("5");
-			panelPregSatis.add(rdbtnCinco);
+			rdbtnCinco = new JRadioButton("5");
+			panelPregSatis.add(rdbtnCinco);*/
 
 		}else if(auxpre[1].equals("corta_larga")){//en String[] habra: 0->idpreg, 1->tipo ,2 ->pregunta, n-1->posi resp del tipo, n->resp
+			System.out.println("CargarPregunta: corta_larga");
 
 			//esto cambia las capas para q se vea solo el panel que quiero mostrar
 			layeredPane.setLayer(panelPregTest, new Integer(0));//Cambia la capa del componente. El segundo  argumento indica la capa
 			layeredPane.setLayer(panelPregSatis, new Integer(1));//Cambia la capa del componente. El segundo  argumento indica la capa
 			layeredPane.setLayer(panelPregLarga, new Integer(2));//Cambia la capa del componente. El segundo  argumento indica la capa
 
-			JLabel lblPreguntaLarga = new JLabel(auxpre[2]);
+			lblPreguntaLarga.setText(auxpre[2]);
+			textRespLarga.setText("");
+			
+			/*lblPreguntaLarga = new JLabel(auxpre[2]);
 			panelPregLarga.add(lblPreguntaLarga);
 
 			textRespLarga = new JTextField();
 			panelPregLarga.add(textRespLarga);
-			textRespLarga.setColumns(30);
+			textRespLarga.setColumns(30);*/
 		}
 
 

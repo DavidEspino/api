@@ -8,5 +8,9 @@ public class PreguntaSatisfaccion extends Pregunta {
 		super(pId, pTitulo);
 		rango = pRango;
 	}
+	
+	public int getRango(){
+		return rango;
+	}
 
 }
