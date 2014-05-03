@@ -23,7 +23,6 @@ public class GestorLogin {
 	public String login(String nombreRellenador, String contrasena){
 		
 		String tipo = "fallo";
-		boolean login =false;
 		
 		try {
 			ResultSet rs = BD.getInstance().consulta("select tipo from usuarios where nomUsu='"+nombreRellenador+"' and contraseña='"+contrasena+"';");				
