@@ -61,27 +61,7 @@ public class Pregunta {
 
 
 	}
-	/**
-	 * @author HelenJ
-	 */
-	private void anadirRespuesta(int pIdCuesti, String pResp, String pUsuario){
-		try {
-			String sql = "INSERT INTO `respuesta`(`idPreg`, `respuesta`, `idusuariocontesta`) "
-					   + "VALUES ("+this.id+",'"+pResp+",'"+pUsuario+"');";
-			BD.getInstance().insertar(sql);
-			
-			//obtengo la fecha actual
-			Calendar fecha = new GregorianCalendar();
-			String f=""+fecha.get(Calendar.DAY_OF_MONTH)+""+fecha.get(Calendar.MONTH)+""+fecha.get(Calendar.YEAR)+"";
-			
-			sql="INSERT INTO `usucontestacuesti`(`nomUsu`, `idCuesti`, `fecha`) "
-			  + "VALUES ('"+pUsuario+"',"+pIdCuesti+",'"+f+"');";
-			BD.getInstance().insertar(sql);
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	public LinkedList<String> getRespuestas() {
 		return this.listaRespuestas;
