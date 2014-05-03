@@ -102,6 +102,8 @@ public class ModificarCrearCuestionario {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		frmCreacionmodificacionCuestionario.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
+		
+		//Tabla mas actualizarla
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		actualizarTabla();
@@ -110,7 +112,7 @@ public class ModificarCrearCuestionario {
 		btnAnadirPregunta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Añadimos pregunta
-				AnadirPreguntaACuestionario frame = new AnadirPreguntaACuestionario(idCuestionario);
+				AnadirPreguntaACuestionario frame = new AnadirPreguntaACuestionario(idCuestionario, usuario);
 				frame.getFrmAnadirPregunta().setVisible(true);
 				frmCreacionmodificacionCuestionario.dispose();
 			}

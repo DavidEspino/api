@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
+import javax.swing.JTextField;
+
 public class GestorCuestionarios {
 	
 	private static GestorCuestionarios mgc;
@@ -141,6 +143,15 @@ public class GestorCuestionarios {
 		}
 	}
 	
+	public void anadirPreguntaACuestionario(int idPregunta, int idCuestionario){
+		try {
+			String sql = "INSERT INTO `cuesticontienepreg`(`idCuesti`, `idPreg`) VALUES ("+idCuestionario+","+idPregunta+");";
+			BD.getInstance().insertar(sql);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 	public void eliminarPreguntaDeCuestionario(int idPregunta, int idCuestionario){
 		try {
 			BD.getInstance().borrar("delete from cuesticontienepreg where idPreg =" + idPregunta + " and idCuesti=" +idCuestionario +";");
@@ -169,5 +180,50 @@ public class GestorCuestionarios {
 			// TODO: handle exception
 		}
 	}
+
+	
+	
+	//Metodos para añadir preguntas
+	public void anadirPreguntaCorta(String pregunta) {
+		try {
+			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','corta_larga');";
+			BD.getInstance().insertar(sql);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void anadirPreguntaLarga(String pregunta) {
+		try {
+			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','corta_larga');";
+			BD.getInstance().insertar(sql);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void anadirPreguntaSatisfaccion(String pregunta) {
+		try {
+			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','satisfaccion');";
+			BD.getInstance().insertar(sql);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void anadirPreguntaTest(String pregunta,
+			String respuesta1, String respuesta2,
+			String respuesta3, String respuesta4,
+			int respuestaCorrecta) {
+		
+		try {
+			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','test');";
+			BD.getInstance().insertar(sql);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+
 	
 }
