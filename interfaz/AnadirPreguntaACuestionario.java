@@ -29,7 +29,7 @@ public class AnadirPreguntaACuestionario {
 	
 	private JRadioButton rdbtnText = new JRadioButton("Text");
 	private JRadioButton rdbtnSatisfaccion = new JRadioButton("Satisfacci\u00F3n");
-	private JRadioButton rdbtnPregunta = new JRadioButton("Pregunta");
+	private JRadioButton rdbtnPregunta = new JRadioButton("Pregunta Corta");
 	private JRadioButton rdbtnPreguntaLarga = new JRadioButton("Pregunta Larga");
 	
 	private JTextField textFieldPregunta;
@@ -37,11 +37,6 @@ public class AnadirPreguntaACuestionario {
 	private JTextField textFieldResp2;
 	private JTextField textFieldResp3;
 	private JTextField textFieldResp4;
-	
-	private JRadioButton radioButton1 = new JRadioButton("");
-	private JRadioButton radioButton2 = new JRadioButton("");
-	private JRadioButton radioButton3 = new JRadioButton("");
-	private JRadioButton radioButton4 = new JRadioButton("");
 
 	
 	//constructor
@@ -176,9 +171,6 @@ public class AnadirPreguntaACuestionario {
 		panel_7.add(textFieldResp1);
 		textFieldResp1.setColumns(10);
 		
-		radioButton1.setBounds(305, 7, 27, 23);
-		panel_7.add(radioButton1);
-		
 		
 		//Respuesta 2
 		JLabel lblRespuesta2 = new JLabel("Respuesta 2:");
@@ -189,9 +181,6 @@ public class AnadirPreguntaACuestionario {
 		textFieldResp2.setBounds(97, 36, 202, 17);
 		textFieldResp2.setColumns(10);
 		panel_7.add(textFieldResp2);
-		
-		radioButton2.setBounds(305, 32, 27, 23);
-		panel_7.add(radioButton2);
 		
 		
 		
@@ -205,9 +194,6 @@ public class AnadirPreguntaACuestionario {
 		textFieldResp3.setColumns(10);
 		panel_7.add(textFieldResp3);
 		
-		radioButton3.setBounds(305, 57, 27, 23);
-		panel_7.add(radioButton3);
-		
 		
 		//Respuesta4
 		JLabel lblRespuesta4 = new JLabel("Respuesta 4:");
@@ -218,40 +204,6 @@ public class AnadirPreguntaACuestionario {
 		textFieldResp4.setBounds(97, 86, 202, 17);
 		textFieldResp4.setColumns(10);
 		panel_7.add(textFieldResp4);
-		
-		radioButton4.setBounds(305, 82, 27, 23);
-		panel_7.add(radioButton4);
-		
-		
-		//Radio button only 1 selected
-		radioButton1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				radioButton2.setSelected(false);
-				radioButton3.setSelected(false);
-				radioButton4.setSelected(false);
-			}
-		});
-		radioButton2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				radioButton1.setSelected(false);
-				radioButton3.setSelected(false);
-				radioButton4.setSelected(false);
-			}
-		});
-		radioButton3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				radioButton1.setSelected(false);
-				radioButton2.setSelected(false);
-				radioButton4.setSelected(false);
-			}
-		});
-		radioButton4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				radioButton1.setSelected(false);
-				radioButton2.setSelected(false);
-				radioButton3.setSelected(false);
-			}
-		});
 		
 		//Botones
 		JButton btnAadirPregunta = new JButton("   A\u00F1adir   ");
@@ -281,38 +233,16 @@ public class AnadirPreguntaACuestionario {
 	
 	private void anadirPregunta(){
 		if (rdbtnPregunta.isSelected()) {
-			GestorCuestionarios.getGestorCuestionarios().anadirPreguntaCorta(textFieldPregunta.getText());
+			GestorCuestionarios.getGestorCuestionarios().anadirPreguntaCorta(textFieldPregunta.getText(), idCuestionario);
 		}
 		else if (rdbtnPreguntaLarga.isSelected()) {
-			GestorCuestionarios.getGestorCuestionarios().anadirPreguntaLarga(textFieldPregunta.getText());
+			GestorCuestionarios.getGestorCuestionarios().anadirPreguntaLarga(textFieldPregunta.getText(), idCuestionario);
 		}
 		else if (rdbtnSatisfaccion.isSelected()){
-			GestorCuestionarios.getGestorCuestionarios().anadirPreguntaSatisfaccion(textFieldPregunta.getText());
+			GestorCuestionarios.getGestorCuestionarios().anadirPreguntaSatisfaccion(textFieldPregunta.getText(), idCuestionario);
 		}
 		else if (rdbtnText.isSelected()) {
-			int respuestaCorrecta;
-			if (radioButton1.isSelected()) {
-				respuestaCorrecta = 1;
-			}
-			else if (radioButton2.isSelected()) {
-				respuestaCorrecta = 2;
-			}
-			else if (radioButton3.isSelected()) {
-				respuestaCorrecta = 3;
-			}
-			else if (radioButton4.isSelected()) {
-				respuestaCorrecta = 4;
-			}
-			else {
-				respuestaCorrecta = -1;
-			}
-			
-			if (respuestaCorrecta != -1) {
-				GestorCuestionarios.getGestorCuestionarios().anadirPreguntaTest(textFieldPregunta.getText(), textFieldResp1.getText(), textFieldResp2.getText(), textFieldResp3.getText(), textFieldResp4.getText(), respuestaCorrecta);
-			}	
-		}
-		else{
-			
+			GestorCuestionarios.getGestorCuestionarios().anadirPreguntaTest(textFieldPregunta.getText(), textFieldResp1.getText(), textFieldResp2.getText(), textFieldResp3.getText(), textFieldResp4.getText(), idCuestionario);
 		}
 	}
 }

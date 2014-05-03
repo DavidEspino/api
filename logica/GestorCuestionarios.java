@@ -2,12 +2,9 @@ package logica;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
-
-import javax.swing.JTextField;
 
 public class GestorCuestionarios {
 	
@@ -184,43 +181,78 @@ public class GestorCuestionarios {
 	
 	
 	//Metodos para añadir preguntas
-	public void anadirPreguntaCorta(String pregunta) {
+	public int obtenerIdPregunta(String pregunta, String tipo){
+		String consulta = "select idPregunta from preguntas where pregunta='"+pregunta+"' and tipo='" +tipo +"';";
+		int id=-1;
+		try {
+			ResultSet sql = BD.getInstance().consulta(consulta);
+			while(sql.next()){
+				id = sql.getInt("idPregunta");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
+	
+	public void anadirPreguntaCorta(String pregunta, int idCuestionario) {
 		try {
 			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','corta_larga');";
 			BD.getInstance().insertar(sql);
+			int id = obtenerIdPregunta(pregunta, "corta_larga");
+			anadirPreguntaACuestionario(id, idCuestionario);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
-	public void anadirPreguntaLarga(String pregunta) {
+	public void anadirPreguntaLarga(String pregunta, int idCuestionario) {
 		try {
 			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','corta_larga');";
 			BD.getInstance().insertar(sql);
+			int id = obtenerIdPregunta(pregunta, "corta_larga");
+			anadirPreguntaACuestionario(id, idCuestionario);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
-	public void anadirPreguntaSatisfaccion(String pregunta) {
+	public void anadirPreguntaSatisfaccion(String pregunta, int idCuestionario) {
 		try {
 			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','satisfaccion');";
 			BD.getInstance().insertar(sql);
+			int id = obtenerIdPregunta(pregunta, "satisfaccion");
+			anadirPreguntaACuestionario(id, idCuestionario);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
 	public void anadirPreguntaTest(String pregunta,
 			String respuesta1, String respuesta2,
 			String respuesta3, String respuesta4,
-			int respuestaCorrecta) {
+			int idCuestionario) {
 		
 		try {
 			String sql = "INSERT INTO `preguntas`(`pregunta`, `tipo`) VALUES ('"+pregunta+"','test');";
 			BD.getInstance().insertar(sql);
+			int id = obtenerIdPregunta(pregunta, "test");
+			anadirRespuestasTest(id, respuesta1, respuesta2, respuesta3, respuesta4);
+			anadirPreguntaACuestionario(id, idCuestionario);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void anadirRespuestasTest(int id, String respuesta1,
+			String respuesta2, String respuesta3, String respuesta4) {
+		try {
+			String sql = "INSERT INTO `preguntatipotest`(`idPreg`, `pregUno`, `pregDos`, `pregTres`, `pregCuatro`) VALUES ("+id+",'"+respuesta1+"','"+respuesta2+"','"+respuesta3+"','"+respuesta4+"');";
+			BD.getInstance().insertar(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 	}
