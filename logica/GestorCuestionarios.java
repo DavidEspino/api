@@ -141,4 +141,33 @@ public class GestorCuestionarios {
 		}
 	}
 	
+	public void eliminarPreguntaDeCuestionario(int idPregunta, int idCuestionario){
+		try {
+			BD.getInstance().borrar("delete from cuesticontienepreg where idPreg =" + idPregunta + " and idCuesti=" +idCuestionario +";");
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void nuevoCuestionario(String nombreCuestionario, String nombreUsuario) {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "INSERT INTO `cuestionario`(`titulo`, `usuCreador`) VALUES ('"+nombreCuestionario+"','"+nombreUsuario+"');";
+			BD.getInstance().insertar(sql);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	public void modificarCuestionario(String nombreCuestionario, int idCuestionario) {
+		// TODO Auto-generated method stub
+		try {
+			String sql ="UPDATE `cuestionario` SET `titulo`='"+nombreCuestionario+"' where `idCuestionario`='"+idCuestionario+"';";
+			BD.getInstance().actualizar(sql);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 }

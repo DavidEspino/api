@@ -31,11 +31,13 @@ public class ModificarCrearCuestionario {
 	private JButton btnGuardar;
 	private JButton btnCancelar;
 	private JScrollPane scrollPane;
-	private JButton btnNuevaPregunta;
+	private JButton btnAnadirPregunta;
 	private int idCuestionario = -1;
 	private JTable table;
-	private JButton btnModificarPregunta;
+	private JButton btnEliminarPregunta;
 	private String usuario;
+	private LinkedList<Pregunta> listaPreguntas;
+
 
 	//Constructor
 	public static void main(String[] args) {
@@ -58,6 +60,7 @@ public class ModificarCrearCuestionario {
 	public ModificarCrearCuestionario(String pUsuario, int pIdCuestionario) {
 		usuario = pUsuario;
 		idCuestionario = pIdCuestionario;	
+		listaPreguntas = GestorCuestionarios.getGestorCuestionarios().obtenerPreguntasCuestionario(idCuestionario);
 		initialize();
 	}
 
@@ -66,6 +69,7 @@ public class ModificarCrearCuestionario {
 	public JFrame getFrmCreacionmodificacionCuestionario() {
 		return frmCreacionmodificacionCuestionario;
 	}
+	
 
 	//Window
 	private void initialize() {
@@ -100,27 +104,46 @@ public class ModificarCrearCuestionario {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		actualizarTabla();
 		
-		btnNuevaPregunta = new JButton("Nueva pregunta");
-		btnNuevaPregunta.addActionListener(new ActionListener() {
+		btnAnadirPregunta = new JButton("A\u00F1adir pregunta");
+		btnAnadirPregunta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Añadimso pregunta
+				//Añadimos pregunta
+				AnadirPreguntaACuestionario frame = new AnadirPreguntaACuestionario(idCuestionario);
+				frame.getFrmAnadirPregunta().setVisible(true);
+				frmCreacionmodificacionCuestionario.dispose();
 			}
 		});
-		panel_1.add(btnNuevaPregunta);
+		panel_1.add(btnAnadirPregunta);
 		
-		btnModificarPregunta = new JButton("Modificar pregunta");
-		btnModificarPregunta.addActionListener(new ActionListener() {
+		btnEliminarPregunta = new JButton("Eliminar Pregunta");
+		btnEliminarPregunta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Modificamos la pregunta seleccionada
+				//Borramos la pregunta seleccionada
+				if (idCuestionario != -1){
+					int aux = table.getSelectedRow();
+					int idPregunta = listaPreguntas.get(aux).getId();
+					GestorCuestionarios.getGestorCuestionarios().eliminarPreguntaDeCuestionario(idPregunta, idCuestionario);
+					actualizarTabla();
+				}
 			}
 		});
-		panel_1.add(btnModificarPregunta);
+		panel_1.add(btnEliminarPregunta);
 		
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Guardamos los datos que existan en pantalla
+				if (idCuestionario == -1){
+					GestorCuestionarios.getGestorCuestionarios().nuevoCuestionario(textFieldNombre.getText(), usuario);
+				}
+				else {
+					GestorCuestionarios.getGestorCuestionarios().modificarCuestionario(textFieldNombre.getText(), idCuestionario);
+				}
+				ConfiguracionCuestionario frame = new ConfiguracionCuestionario(usuario);
+				frame.getFrmConfiguracinCuestionario().setVisible(true);
+				frmCreacionmodificacionCuestionario.dispose();
 			}
 		});
 		panel_1.add(btnGuardar);
@@ -135,20 +158,16 @@ public class ModificarCrearCuestionario {
 		});
 		panel_1.add(btnCancelar);
 		
-		
-		
-		
-		
-		
-		
-		
+	}
+	
+	private void actualizarTabla(){
 		//Cargar datos
-		if (idCuestionario != 0) {
+		if (idCuestionario != -1) {
 			//Cargamos el nombre
+			listaPreguntas = GestorCuestionarios.getGestorCuestionarios().obtenerPreguntasCuestionario(idCuestionario);
 			String nombre = GestorCuestionarios.getGestorCuestionarios().obtenerNombreCuestionario(idCuestionario);
 			textFieldNombre.setText(nombre);
-			//Cargamos las preguntas
-			final LinkedList<Pregunta> listaPreguntas = GestorCuestionarios.getGestorCuestionarios().obtenerPreguntasCuestionario(idCuestionario);
+			
 			
 			String[] columnNames = {"ID", "Pregunta"};
 			Object[][] data = new Object[listaPreguntas.size()][2];
@@ -160,6 +179,6 @@ public class ModificarCrearCuestionario {
 			
 			table = new JTable(data, columnNames);
 			scrollPane.setViewportView(table);
-		}	
+		}
 	}
 }

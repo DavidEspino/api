@@ -28,7 +28,7 @@ public class Cuestionario {
 			ResultSet subsql1, subsql2, sql = BD.getInstance().consulta(consulta);
 			while(sql.next()){
 				//sacamos el titulo y el id de las preguntas
-				titulo = sql.getString("titulo");
+				titulo = sql.getString("pregunta");
 				idP = sql.getInt("idPregunta");
 				//miramos si la pregunta es de satisfacción
 				subconsulta1 =  "select rango from preguntatiposatis where idPreg='"+idP+"';";
