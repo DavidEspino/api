@@ -1,7 +1,5 @@
 package interfaz;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -39,8 +37,8 @@ public class ModificarCrearCuestionario {
 	private LinkedList<Pregunta> listaPreguntas;
 
 
-	//Constructor
-	public static void main(String[] args) {
+
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -51,8 +49,8 @@ public class ModificarCrearCuestionario {
 				}
 			}
 		});
-	}
-
+	}*/
+	//Constructor
 	public ModificarCrearCuestionario(String pUsuario) {
 		usuario = pUsuario;
 		initialize();
@@ -76,7 +74,7 @@ public class ModificarCrearCuestionario {
 		frmCreacionmodificacionCuestionario = new JFrame();
 		frmCreacionmodificacionCuestionario.setTitle("Creacion/Modificacion Cuestionario");
 		frmCreacionmodificacionCuestionario.setBounds(100, 100, 488, 455);
-		frmCreacionmodificacionCuestionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCreacionmodificacionCuestionario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		panel = new JPanel();
 		frmCreacionmodificacionCuestionario.getContentPane().add(panel, BorderLayout.NORTH);

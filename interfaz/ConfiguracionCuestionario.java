@@ -1,7 +1,5 @@
 package interfaz;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 
@@ -26,8 +24,8 @@ public class ConfiguracionCuestionario extends JFrame {
 	private String usuario;
 	
 	
-	//Constructora
-	public static void main(String[] args) {
+	
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -38,8 +36,8 @@ public class ConfiguracionCuestionario extends JFrame {
 				}
 			}
 		});
-	}
-
+	}*/
+	//Constructora
 	public ConfiguracionCuestionario(String pUsuario) {
 		usuario = pUsuario;
 		initialize();
@@ -57,7 +55,7 @@ public class ConfiguracionCuestionario extends JFrame {
 		frmConfiguracinCuestionario = new JFrame();
 		frmConfiguracinCuestionario.setTitle("Configuraci\u00F3n de Cuestionarios");
 		frmConfiguracinCuestionario.setBounds(100, 100, 450, 300);
-		frmConfiguracinCuestionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmConfiguracinCuestionario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmConfiguracinCuestionario.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();

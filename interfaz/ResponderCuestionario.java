@@ -94,7 +94,7 @@ public class ResponderCuestionario {
 		frmResponderCuestionario = new JFrame();
 		frmResponderCuestionario.setTitle("Responder Cuestionario");
 		frmResponderCuestionario.setBounds(100, 100, 450, 300);
-		frmResponderCuestionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmResponderCuestionario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmResponderCuestionario.getContentPane().setLayout(new BorderLayout(0, 0));
 
 

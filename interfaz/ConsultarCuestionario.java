@@ -67,7 +67,7 @@ public class ConsultarCuestionario {
 		frmConsultarCuestionario = new JFrame();
 		frmConsultarCuestionario.setTitle("Consultar Cuestionario");
 		frmConsultarCuestionario.setBounds(100, 100, 450, 300);
-		frmConsultarCuestionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmConsultarCuestionario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		frmConsultarCuestionario.getContentPane().add(panel, BorderLayout.SOUTH);

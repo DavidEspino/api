@@ -1,6 +1,5 @@
 package interfaz;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -39,8 +38,8 @@ public class AnadirPreguntaACuestionario {
 	private JTextField textFieldResp4;
 
 	
-	//constructor
-	public static void main(String[] args) {
+	
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -51,10 +50,10 @@ public class AnadirPreguntaACuestionario {
 				}
 			}
 		});
-	}
+	}*/
 
 
-
+	//constructor
 	public AnadirPreguntaACuestionario(int pIdCuestionario, String pUsuario) {
 		idCuestionario = pIdCuestionario;
 		usuario = pUsuario;
@@ -71,7 +70,7 @@ public class AnadirPreguntaACuestionario {
 	private void initialize() {
 		frmAnadirPregunta = new JFrame();
 		frmAnadirPregunta.setBounds(100, 100, 409, 262);
-		frmAnadirPregunta.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAnadirPregunta.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		frmAnadirPregunta.getContentPane().add(panel, BorderLayout.SOUTH);		
