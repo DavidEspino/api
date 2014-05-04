@@ -86,7 +86,6 @@ public class ConfiguracionCuestionario extends JFrame {
 		
 		
 		
-		
 		JButton btnAadirCuestionario = new JButton("A\u00F1adir Cuestionario");
 		btnAadirCuestionario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

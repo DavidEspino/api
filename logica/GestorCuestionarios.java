@@ -187,6 +187,21 @@ public class GestorCuestionarios {
 			// TODO: handle exception
 		}
 	}
+	
+	
+	public int obtenerIdCuestionario(String titulo, String usuario) {
+		String consulta = "select idCuestionario from cuestionario where titulo='"+titulo+"' and usuCreador='" +usuario +"';";
+		int id=-1;
+		try {
+			ResultSet sql = BD.getInstance().consulta(consulta);
+			while(sql.next()){
+				id = sql.getInt("idCuestionario");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
 
 	
 	

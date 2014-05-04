@@ -110,9 +110,12 @@ public class ModificarCrearCuestionario {
 		btnAnadirPregunta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Añadimos pregunta
-				AnadirPreguntaACuestionario frame = new AnadirPreguntaACuestionario(idCuestionario, usuario);
-				frame.getFrmAnadirPregunta().setVisible(true);
-				frmCreacionmodificacionCuestionario.dispose();
+				if (!textFieldNombre.getText().isEmpty()){
+					crearCuestionario();
+					AnadirPreguntaACuestionario frame = new AnadirPreguntaACuestionario(idCuestionario, usuario);
+					frame.getFrmAnadirPregunta().setVisible(true);
+					frmCreacionmodificacionCuestionario.dispose();
+				}
 			}
 		});
 		panel_1.add(btnAnadirPregunta);
@@ -136,12 +139,7 @@ public class ModificarCrearCuestionario {
 			public void actionPerformed(ActionEvent arg0) {
 				//Guardamos los datos que existan en pantalla
 				if (!textFieldNombre.getText().isEmpty()){
-					if (idCuestionario == -1){
-						GestorCuestionarios.getGestorCuestionarios().nuevoCuestionario(textFieldNombre.getText(), usuario);
-					}
-					else {
-						GestorCuestionarios.getGestorCuestionarios().modificarCuestionario(textFieldNombre.getText(), idCuestionario);
-					}
+					crearCuestionario();
 					ConfiguracionCuestionario frame = new ConfiguracionCuestionario(usuario);
 					frame.getFrmConfiguracinCuestionario().setVisible(true);
 					frmCreacionmodificacionCuestionario.dispose();
@@ -181,6 +179,16 @@ public class ModificarCrearCuestionario {
 			
 			table = new JTable(data, columnNames);
 			scrollPane.setViewportView(table);
+		}
+	}
+	
+	private void crearCuestionario(){
+		if (idCuestionario == -1){
+			GestorCuestionarios.getGestorCuestionarios().nuevoCuestionario(textFieldNombre.getText(), usuario);
+			idCuestionario = GestorCuestionarios.getGestorCuestionarios().obtenerIdCuestionario(textFieldNombre.getText(), usuario);
+		}
+		else {
+			GestorCuestionarios.getGestorCuestionarios().modificarCuestionario(textFieldNombre.getText(), idCuestionario);
 		}
 	}
 }
