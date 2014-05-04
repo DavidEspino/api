@@ -68,10 +68,10 @@ public class CuestionarioX {
 			}
 		});
 		panel.add(btnConsultarSeleccion);
-		*/
+		
 		JButton btnCancelar = new JButton("Cancelar");
 		panel.add(btnCancelar);
-		
+		*/
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
