@@ -181,6 +181,7 @@ public class ResponderCuestionario {
 		frmResponderCuestionario.getContentPane().add(panelBotones, BorderLayout.SOUTH);
 		panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
+		/*
 		//muestra la pregunta anterior
 		JButton btnAnterior = new JButton("Anterior");
 		btnAnterior.addActionListener(new ActionListener() {
@@ -194,7 +195,7 @@ public class ResponderCuestionario {
 			}
 		});
 		panelBotones.add(btnAnterior);
-
+		 */
 		//muestra la siguiente pregunta
 		btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
