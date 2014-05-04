@@ -135,15 +135,17 @@ public class ModificarCrearCuestionario {
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Guardamos los datos que existan en pantalla
-				if (idCuestionario == -1){
-					GestorCuestionarios.getGestorCuestionarios().nuevoCuestionario(textFieldNombre.getText(), usuario);
+				if (!textFieldNombre.getText().isEmpty()){
+					if (idCuestionario == -1){
+						GestorCuestionarios.getGestorCuestionarios().nuevoCuestionario(textFieldNombre.getText(), usuario);
+					}
+					else {
+						GestorCuestionarios.getGestorCuestionarios().modificarCuestionario(textFieldNombre.getText(), idCuestionario);
+					}
+					ConfiguracionCuestionario frame = new ConfiguracionCuestionario(usuario);
+					frame.getFrmConfiguracinCuestionario().setVisible(true);
+					frmCreacionmodificacionCuestionario.dispose();
 				}
-				else {
-					GestorCuestionarios.getGestorCuestionarios().modificarCuestionario(textFieldNombre.getText(), idCuestionario);
-				}
-				ConfiguracionCuestionario frame = new ConfiguracionCuestionario(usuario);
-				frame.getFrmConfiguracinCuestionario().setVisible(true);
-				frmCreacionmodificacionCuestionario.dispose();
 			}
 		});
 		panel_1.add(btnGuardar);

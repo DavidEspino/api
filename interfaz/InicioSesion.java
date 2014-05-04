@@ -89,7 +89,7 @@ public class InicioSesion extends JFrame {
 		lblInicioDeSesin.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panel.add(lblInicioDeSesin);
 		
-		JLabel lblUsuario = new JLabel("Usuario:     ");
+		JLabel lblUsuario = new JLabel("Usuario:      ");
 		panel_3.add(lblUsuario);
 		
 		textFieldUsuario = new JTextField();
