@@ -27,7 +27,7 @@ public class AnadirPreguntaACuestionario {
 	private int idCuestionario;
 	private String usuario;
 	
-	private JRadioButton rdbtnText = new JRadioButton("Text");
+	private JRadioButton rdbtnText = new JRadioButton("Test");
 	private JRadioButton rdbtnSatisfaccion = new JRadioButton("Satisfacci\u00F3n");
 	private JRadioButton rdbtnPregunta = new JRadioButton("Pregunta Corta");
 	private JRadioButton rdbtnPreguntaLarga = new JRadioButton("Pregunta Larga");
